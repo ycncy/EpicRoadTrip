@@ -1,0 +1,25 @@
+name: Mirror Project
+on:
+  push:
+    branches: [ main, dev ]
+
+env:
+  MIRROR_URL: "git@github.com:EpitechMscProPromo2025/T-WEB-800-PAR_16.git"
+
+jobs:
+  push_to_mirror:
+    name: Push to Epitech repository
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name }} == "push"
+    steps:
+      - name: Repository checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Cloning to mirror
+        uses: pixta-dev/repository-mirroring-action@v1
+        with:
+          target_repo_url:
+            ${{ env.MIRROR_URL }}
+          ssh_private_key:
+            ${{ secrets.SSH_PRIVATE_KEY }}
