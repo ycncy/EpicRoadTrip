@@ -2,10 +2,8 @@ import React from 'react';
 
 const Filter = () => {
     return (
-        <div>
-            <h1 className="text-lg font-bold">
-                Hello world!
-            </h1>
+        <div class="relative h-32 w-32 ...">
+            <div class="absolute inset-y-0 left-0 w-16 ...">04</div>
         </div>
     );
 };
