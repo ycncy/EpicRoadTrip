@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Filter = ({ title, children }) => {
+const Map = ({ title, children }) => {
     return (
-        <div className="rounded overflow-hidden shadow-lg bg-black m-5">
+        <div className="h-screen rounded shadow-lg bg-blue-500 m-5">
             <div className="">
                 <div className="font-bold text-xl mb-2">{title}</div>
                 <p className="text-gray-700 text-base">
@@ -13,5 +13,4 @@ const Filter = ({ title, children }) => {
     );
 };
 
-
-export default Filter;
+export default Map;
