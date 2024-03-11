@@ -3,7 +3,7 @@ import Logo from '../assets/logo.png'
 
 const NavBar = () => {
     return (
-        <nav className="text-black p-7">
+        <nav className="text-[#5788ed] p-7">
           <div className="container mx-auto flex justify-between items-center">
             <div className="text-2xl">
               {/* Insérez votre logo ou élément à gauche ici si nécessaire */}
