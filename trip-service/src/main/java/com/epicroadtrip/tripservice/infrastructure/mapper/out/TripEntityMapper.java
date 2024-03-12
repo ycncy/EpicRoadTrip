@@ -1,6 +1,6 @@
-package com.epicroadtrip.tripservice.interfaces.mapper;
+package com.epicroadtrip.tripservice.infrastructure.mapper.out;
 
-import com.epicroadtrip.tripservice.domain.dto.response.TripResponse;
+import com.epicroadtrip.tripservice.application.dto.response.TripResponse;
 import com.epicroadtrip.tripservice.domain.model.TripModel;
 import com.epicroadtrip.tripservice.infrastructure.persistence.entity.TripEntity;
 import org.springframework.stereotype.Component;

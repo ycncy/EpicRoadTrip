@@ -1,6 +1,6 @@
-package com.epicroadtrip.tripservice.interfaces.mapper;
+package com.epicroadtrip.tripservice.infrastructure.mapper.in;
 
-import com.epicroadtrip.tripservice.domain.dto.request.CreatePatchTripRequest;
+import com.epicroadtrip.tripservice.application.dto.request.CreatePatchTripDTO;
 import com.epicroadtrip.tripservice.domain.model.TripModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class TripDtoMapper {
 
-    public TripModel toDomain (CreatePatchTripRequest tripRequest) {
+    public TripModel toDomain (CreatePatchTripDTO tripRequest) {
         return new TripModel(
                 tripRequest.getTitle(),
                 tripRequest.getDescription(),

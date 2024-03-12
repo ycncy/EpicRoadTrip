@@ -1,4 +1,4 @@
-package com.epicroadtrip.tripservice.domain.dto.response;
+package com.epicroadtrip.tripservice.application.dto.response;
 
 public record ErrorResponse (String status, String message) {
 }

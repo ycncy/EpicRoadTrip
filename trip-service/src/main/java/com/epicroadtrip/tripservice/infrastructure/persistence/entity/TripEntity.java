@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Data
 @Entity(name="Trip")
@@ -15,7 +16,7 @@ public class TripEntity {
 
     @Id
     @GeneratedValue(strategy=GenerationType.UUID)
-    private String id;
+    private UUID id;
 
     private String title;
 

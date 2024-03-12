@@ -1,4 +1,4 @@
-package com.epicroadtrip.tripservice.domain.dto.request;
+package com.epicroadtrip.tripservice.application.dto.request;
 
 import com.epicroadtrip.tripservice.domain.model.Position;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -7,7 +7,7 @@ import lombok.Getter;
 import java.time.LocalDateTime;
 
 @Getter
-public class CreatePatchTripRequest {
+public class CreatePatchTripDTO {
     @Schema(description="Trip title", example="Paris-Marseille 2024", requiredMode=Schema.RequiredMode.REQUIRED)
     private final String title;
 
@@ -26,7 +26,7 @@ public class CreatePatchTripRequest {
     @Schema(description="End datetime of the trip", requiredMode=Schema.RequiredMode.NOT_REQUIRED)
     private final LocalDateTime endDatetime;
 
-    public CreatePatchTripRequest(String title, String description, Position startPosition, Position endPosition, LocalDateTime startDatetime, LocalDateTime endDatetime) {
+    public CreatePatchTripDTO(String title, String description, Position startPosition, Position endPosition, LocalDateTime startDatetime, LocalDateTime endDatetime) {
         this.title = title;
         this.description = description;
         this.startPosition = startPosition;
