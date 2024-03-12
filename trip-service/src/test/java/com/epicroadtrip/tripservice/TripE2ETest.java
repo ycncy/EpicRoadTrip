@@ -18,6 +18,7 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -34,7 +35,6 @@ public class TripE2ETest {
         testRestTemplate.getRestTemplate().setRequestFactory(new HttpComponentsClientHttpRequestFactory());
 
         this.patchRestTemplate = testRestTemplate.getRestTemplate();
-        HttpClient httpClient = HttpClientBuilder.create().build();
         this.patchRestTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
     }
 
@@ -104,7 +104,7 @@ public class TripE2ETest {
         );
         ResponseEntity<TripResponse> createResponse = testRestTemplate.postForEntity("/api", createRequest, TripResponse.class);
         assertEquals(HttpStatus.CREATED, createResponse.getStatusCode());
-        String tripId = createResponse.getBody().id();
+        UUID tripId = createResponse.getBody().id();
 
         testRestTemplate.delete("/api/" + tripId);
 
@@ -124,7 +124,7 @@ public class TripE2ETest {
         );
         ResponseEntity<TripResponse> createResponse = testRestTemplate.postForEntity("/api", createRequest, TripResponse.class);
         assertEquals(HttpStatus.CREATED, createResponse.getStatusCode());
-        String tripId = createResponse.getBody().id();
+        UUID tripId = createResponse.getBody().id();
 
         ResponseEntity<TripResponse> getResponse = testRestTemplate.getForEntity("/api/" + tripId, TripResponse.class);
 
