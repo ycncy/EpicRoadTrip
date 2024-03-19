@@ -5,11 +5,11 @@ services:
     image: 'mysql:5.7'
     restart: 'always'
     environment:
-      MYSQL_DATABASE: "${MYSQL_DATABASE}"
-      MYSQL_USER: "${MYSQL_USER}"
-      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+      MYSQL_DATABASE: 'test'
+      MYSQL_USER: 'test'
+      MYSQL_PASSWORD: 'test'
     ports:
-      - "${MYSQL_PORT}:3306"
+      - "3306:3306"
     volumes:
       - 'my-db-prod:/var/lib/mysql'
 
