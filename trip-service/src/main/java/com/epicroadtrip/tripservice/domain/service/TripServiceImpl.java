@@ -1,6 +1,5 @@
 package com.epicroadtrip.tripservice.domain.service;
 
-import com.epicroadtrip.tripservice.application.dto.request.CreatePatchTripDTO;
 import com.epicroadtrip.tripservice.application.dto.response.DeleteTripResponse;
 import com.epicroadtrip.tripservice.application.dto.response.TripResponse;
 import com.epicroadtrip.tripservice.domain.model.TripModel;
