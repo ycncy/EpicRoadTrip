@@ -1,0 +1,30 @@
+version: '3.3'
+
+services:
+  db_prod:
+    image: 'mysql:5.7'
+    restart: 'always'
+    environment:
+      MYSQL_DATABASE: "${MYSQL_DATABASE}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+    ports:
+      - "${MYSQL_PORT}:3306"
+    volumes:
+      - 'my-db-prod:/var/lib/mysql'
+
+  test_db_prod:
+    image: 'mysql:5.7'
+    restart: 'always'
+    environment:
+      MYSQL_DATABASE: "${MYSQL_TEST_DATABASE}"
+      MYSQL_USER: "${MYSQL_TEST_USER}"
+      MYSQL_PASSWORD: "${MYSQL_TEST_PASSWORD}"
+    ports:
+      - "${MYSQL_TEST_PORT}:3306"
+    volumes:
+      - 'my-test-db-prod:/var/lib/mysql'
+
+volumes:
+  my-db-prod:
+  my-test-db-prod:

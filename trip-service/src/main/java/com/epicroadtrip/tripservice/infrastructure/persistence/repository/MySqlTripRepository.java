@@ -35,12 +35,12 @@ public class MySqlTripRepository implements TripRepository {
         TripEntity tripEntity = springMySqlTripRepository.findById(tripId)
                 .orElseThrow(() -> new TripNotFoundException("Trip not found with id: " + tripId));
 
-        if (trip.getTitle() != null) tripEntity.setTitle(trip.getTitle());
-        if (trip.getDescription() != null) tripEntity.setDescription(trip.getDescription());
-        if (trip.getStartDatetime() != null) tripEntity.setStartDatetime(trip.getStartDatetime());
-        if (trip.getEndDatetime() != null) tripEntity.setEndDatetime(trip.getEndDatetime());
-        if (trip.getStartPosition() != null) tripEntity.setStartPosition(trip.getStartPosition());
-        if (trip.getEndPosition() != null) tripEntity.setEndPosition(trip.getEndPosition());
+        if (trip.title() != null) tripEntity.setTitle(trip.title());
+        if (trip.description() != null) tripEntity.setDescription(trip.description());
+        if (trip.startDatetime() != null) tripEntity.setStartDatetime(trip.startDatetime());
+        if (trip.endDatetime() != null) tripEntity.setEndDatetime(trip.endDatetime());
+        if (trip.startPosition() != null) tripEntity.setStartPosition(trip.startPosition());
+        if (trip.endPosition() != null) tripEntity.setEndPosition(trip.endPosition());
 
         return springMySqlTripRepository.save(tripEntity);
     }

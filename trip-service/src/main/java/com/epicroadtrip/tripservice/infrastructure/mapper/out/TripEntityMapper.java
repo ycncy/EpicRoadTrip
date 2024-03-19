@@ -8,15 +8,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class TripEntityMapper {
 
-    public TripEntity toEntity(TripModel createTripRequest) {
+    public TripEntity toEntity(TripModel tripModel) {
         TripEntity tripEntity = new TripEntity();
 
-        tripEntity.setTitle(createTripRequest.getTitle());
-        tripEntity.setDescription(createTripRequest.getDescription());
-        tripEntity.setStartPosition(createTripRequest.getStartPosition());
-        tripEntity.setEndPosition(createTripRequest.getEndPosition());
-        tripEntity.setStartDatetime(createTripRequest.getStartDatetime());
-        tripEntity.setEndDatetime(createTripRequest.getEndDatetime());
+        tripEntity.setTitle(tripModel.title());
+        tripEntity.setDescription(tripModel.description());
+        tripEntity.setStartPosition(tripModel.startPosition());
+        tripEntity.setEndPosition(tripModel.endPosition());
+        tripEntity.setStartDatetime(tripModel.startDatetime());
+        tripEntity.setEndDatetime(tripModel.endDatetime());
 
         return tripEntity;
     }
