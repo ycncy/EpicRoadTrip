@@ -1,4 +1,5 @@
 "use client";
+import Link from 'next/link';
 import React from 'react';
 
 const Navbar = () => {
@@ -6,9 +7,10 @@ const Navbar = () => {
     <nav className="bg-gray-800 p-6">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center">
-          <div className="flex-shrink-0 text-white">
-            Logo
-          </div>
+        <Link rel="stylesheet" href="/"> 
+        <img src="" alt="" />
+         logo
+        </Link>
           <div className="hidden md:block">
             <ul className="flex space-x-4">
               <li>

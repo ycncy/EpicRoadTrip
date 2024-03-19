@@ -7,8 +7,7 @@ const SearchPage = () => {
     <div className="bg-gray-100 min-h-screen">
       <Navbar />
       <Sidebar />
-      <div className="container mx-auto px-4 py-8">
-          aaaaa
+      <div className="container mx-auto px-4 ">
       </div>
     </div>
    
