@@ -13,7 +13,6 @@ const Sidebar = () => {
 
   return (
     <div className="bg-gray-200 h-screen w-80 flex flex-col mt-10 rounded-md">
-
     <div className="flex-grow mt-0">
       <div className="flex">
         <button

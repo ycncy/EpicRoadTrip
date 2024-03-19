@@ -1,12 +1,12 @@
-import { faFilter, faSort } from '@fortawesome/free-solid-svg-icons';
+import { faBars} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PointOfInterest from './PointOfInterest';
 import SortModal from './Modal/FilterModal';
 
 const TabPointOfInterest = () => {
     const [isSortModalOpen, setIsFilterModalOpen] = useState(false);
-    const PointsOfInterest = ['aa', 'bb', 'cc'];
+    const [pointsOfInterest, setPointsOfInterest] = useState([]);
     
     const handleOpenFilterModal = () => {
         setIsFilterModalOpen(true);
@@ -18,11 +18,19 @@ const TabPointOfInterest = () => {
       const handleSortChange = (event: any) => {
         const selectedSortOption = event.target.value;
       };
+
+      useEffect(() => {
+        fetch('')
+            .then(response => response.json())
+            .then(data => setPointsOfInterest(data))
+            .catch(error => console.error('Erreur lors du chargement des données JSON :', error));
+    }, []);
+
   return (
     <div >
     <div className="flex justify-center mb-4">
        <button onClick={handleOpenFilterModal} className="px-2 py-1 bg-blue-500 text-white rounded-md mr-14">
-         <FontAwesomeIcon icon={faFilter} className='mr-2' />
+         <FontAwesomeIcon icon={faBars} className='mr-2' />
          Filtrer
        </button>
 
@@ -39,8 +47,15 @@ const TabPointOfInterest = () => {
         </div>
         <ul>
       </ul>
-   <PointOfInterest />
 
+     <ul>
+        {pointsOfInterest.map((index) => (
+        <li className='mb-10'>
+            <PointOfInterest key={index}/> 
+        </li>
+     
+        ))}
+    </ul>
 
  </div>
   )
