@@ -1,6 +1,10 @@
 import {Trip} from "@/app/lib/model/Trip";
-import {axiosService} from "@/app/lib/service/axios.service";
 import {DeleteResponse} from "@/app/lib/model/DeleteResponse";
+import axios from "axios";
+
+const axiosService = axios.create({
+    baseURL: "http://localhost:8080/api"
+})
 
 const createTrip = async (trip: Trip): Promise<Trip> => {
     const response = await axiosService.post("/", trip);
