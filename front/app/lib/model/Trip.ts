@@ -1,7 +1,7 @@
 import {Position} from "@/app/lib/model/Position";
 
 export interface Trip {
-    id: string;
+    id?: string;
     title: string;
     description?: string;
     startPosition: Position;

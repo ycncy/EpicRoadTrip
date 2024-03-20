@@ -7,7 +7,7 @@ const axiosService = axios.create({
 })
 
 const createTrip = async (trip: Trip): Promise<Trip> => {
-    const response = await axiosService.post("/", trip);
+    const response = await axiosService.post("", trip);
 
     if (response.status === 201) return response.data;
 }

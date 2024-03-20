@@ -2,6 +2,8 @@
 import React from 'react';
 import {tripService} from "@/app/lib/service/trip.service";
 import {Trip} from "@/app/lib/model/Trip";
+import {useRouter} from "next/navigation";
+import {createTrip} from "@/app/actions";
 
 class CreateTripForm extends React.Component {
 
@@ -22,12 +24,11 @@ class CreateTripForm extends React.Component {
         };
 
         this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(event) {
         const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const value = target.value;
         const name = target.name;
 
         this.setState({
@@ -35,18 +36,11 @@ class CreateTripForm extends React.Component {
         });
     }
 
-    async handleSubmit(event) {
-        const trip: Trip = this.state as Trip;
-        const response = await tripService.createTrip(trip);
-        console.log(response)
-        event.preventDefault();
-    }
-
 
     render() {
         return (
             <form
-                onSubmit={this.handleSubmit}
+                action={createTrip}
                 className="bg-white w-10/12 mx-auto rounded-2xl text-black flex gap-16 py-6 px-8">
                 <div className="flex flex-col gap-4 w-full min-h-full">
                     <h1 className="font-extrabold text-lg">Où allez-vous ?</h1>
