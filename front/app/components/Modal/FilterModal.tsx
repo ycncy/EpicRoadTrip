@@ -1,23 +1,32 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { Button } from '../Button';
 
 interface ModalProps {
   onClose: () => void;
 }
 
-const SortModal: React.FC<ModalProps> = ({ onClose }) => {
+const FilterModal: React.FC<ModalProps> = ({ onClose }) => {
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
 
   const toggleFilterSelection = (filterName: string) => {
-    setSelectedFilters(prevFilters => {
-      if (prevFilters.includes(filterName)) {
-        return prevFilters.filter(filter => filter !== filterName);
-      } else {
-        return [...prevFilters, filterName];
-      }
-    });
-};
+    if (selectedFilters.includes(filterName)) {
+      setSelectedFilters(prevFilters => prevFilters.filter(filter => filter !== filterName));
+    } else {
+      setSelectedFilters(prevFilters => [...prevFilters, filterName]);
+    }
+  };
+
+  const isFilterSelected = (filterName: string) => {
+    return selectedFilters.includes(filterName);
+  };
+
+  const onSubmit = () => {
+    console.log(selectedFilters);
+    onClose();
+  };
+
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">
       <div className="fixed inset-0 bg-black opacity-50"></div>
@@ -30,31 +39,33 @@ const SortModal: React.FC<ModalProps> = ({ onClose }) => {
         <div className="mt-4">
           <h2 className="text-lg font-semibold mb-2">Filtres</h2>
           <div className="mt-4">
-          <ul className="w-48 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-            <li className="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
-              <div className="flex items-center ps-3">
-                <input id="Appartement" type="checkbox" value="Appartement" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" onChange={() => toggleFilterSelection("Appartement")} checked={selectedFilters.includes("Appartement")} />
-                <label htmlFor="Appartement" className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"> Appartement </label>
-              </div>
-            </li>
-            <li className="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
-              <div className="flex items-center ps-3">
-                <input id="Hotel" type="checkbox" value="Hotel" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" onChange={() => toggleFilterSelection("Hotel")} checked={selectedFilters.includes("Hotel")} />
-                <label htmlFor="Hotel" className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Hotel </label>
-              </div>
-            </li>
-            <li className="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
-              <div className="flex items-center ps-3">
-                <input id="Musée" type="checkbox" value="Musée" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" onChange={() => toggleFilterSelection("Musée")} checked={selectedFilters.includes("Musée")} />
-                <label htmlFor="Musée" className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Musée </label>
-              </div>
-            </li>
-          </ul>
-        </div>
+            <span
+              className={`inline-block px-3 py-1 rounded-full text-sm mr-2 mb-2 cursor-pointer ${isFilterSelected("Appartement") ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-900"}`}
+              onClick={() => toggleFilterSelection("Appartement")}
+            >
+              Appartement
+            </span>
+            <span
+              className={`inline-block px-3 py-1 rounded-full text-sm mr-2 mb-2 cursor-pointer ${isFilterSelected("Hotel") ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-900"}`}
+              onClick={() => toggleFilterSelection("Hotel")}
+            >
+              Hotel
+            </span>
+            <span
+              className={`inline-block px-3 py-1 rounded-full text-sm mr-2 mb-2 cursor-pointer ${isFilterSelected("Musée") ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-900"}`}
+              onClick={() => toggleFilterSelection("Musée")}
+            >
+              Musée
+            </span>
+            {/* Ajoutez d'autres filtres de la même manière */}
+          </div>
+          <Button type="submit" className="bg-[#5739FC] p-3 text-sm text-white rounded-xl mt-4 " onClick={onSubmit}>
+            Appliquer les filtres
+          </Button>
         </div>
       </div>
     </div>
   );
 };
 
-export default SortModal;
+export default FilterModal;
