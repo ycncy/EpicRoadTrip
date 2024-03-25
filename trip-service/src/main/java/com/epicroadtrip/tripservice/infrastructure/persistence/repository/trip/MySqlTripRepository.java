@@ -1,4 +1,4 @@
-package com.epicroadtrip.tripservice.infrastructure.persistence.repository;
+package com.epicroadtrip.tripservice.infrastructure.persistence.repository.trip;
 
 import com.epicroadtrip.tripservice.domain.repository.TripRepository;
 import com.epicroadtrip.tripservice.domain.model.TripModel;

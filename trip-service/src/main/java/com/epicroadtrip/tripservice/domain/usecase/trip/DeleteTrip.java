@@ -1,7 +1,6 @@
-package com.epicroadtrip.tripservice.domain.usecase;
+package com.epicroadtrip.tripservice.domain.usecase.trip;
 
 import com.epicroadtrip.tripservice.domain.repository.TripRepository;
-import com.epicroadtrip.tripservice.infrastructure.persistence.entity.TripEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,11 +8,11 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class GetTrip {
+public class DeleteTrip {
 
     private final TripRepository tripRepository;
 
-    public TripEntity execute(UUID id) {
-        return tripRepository.get(id);
+    public boolean execute(UUID tripId) {
+        return tripRepository.delete(tripId);
     }
 }

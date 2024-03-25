@@ -13,6 +13,6 @@ public record TripResponse (
         Position endPosition,
         LocalDateTime startDatetime,
         LocalDateTime endDatetime,
-        LocalDateTime creationDatetime
+        LocalDateTime createdAt
 ) {
 }

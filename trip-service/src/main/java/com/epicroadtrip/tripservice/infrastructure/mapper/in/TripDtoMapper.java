@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
 public class TripDtoMapper {
 
     public TripModel toDomain (CreatePatchTripDTO tripRequest) {

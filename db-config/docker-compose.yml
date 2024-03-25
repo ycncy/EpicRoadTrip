@@ -8,6 +8,9 @@ services:
       MYSQL_DATABASE: 'test'
       MYSQL_USER: 'test'
       MYSQL_PASSWORD: 'test'
+      MYSQL_ROOT_PASSWORD: 'test'
+      MYSQL_ALLOW_EMPTY_PASSWORD: null
+      MYSQL_RANDOM_ROOT_PASSWORD: null
     ports:
       - "3306:3306"
     volumes:
