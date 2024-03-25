@@ -6,7 +6,14 @@ import SortModal from './Modal/FilterModal';
 
 const TabPointOfInterest = () => {
     const [isSortModalOpen, setIsFilterModalOpen] = useState(false);
-    const [pointsOfInterest, setPointsOfInterest] = useState([]);
+    const [pointsOfInterest, setPointsOfInterest] =  useState([]);
+
+    const point = {
+      id: '1',
+      title: 'Point d\'Intérét',
+      position: 'marseille',
+      Image:''
+    }
     
     const handleOpenFilterModal = () => {
         setIsFilterModalOpen(true);
@@ -18,13 +25,12 @@ const TabPointOfInterest = () => {
       const handleSortChange = (event: any) => {
         const selectedSortOption = event.target.value;
       };
-
+      
       useEffect(() => {
-        fetch('')
-            .then(response => response.json())
-            .then(data => setPointsOfInterest(data))
-            .catch(error => console.error('Erreur lors du chargement des données JSON :', error));
-    }, []);
+        fetch("https://data.datatourisme.gouv.fr/10/000ce9fa-eaca-3d78-a395-8798b5965cbc")
+          .then((response) => response.json())
+          .then((data) => setPointsOfInterest(data));
+    }, [])
 
   return (
     <div >
@@ -36,7 +42,7 @@ const TabPointOfInterest = () => {
 
             <select id="sort" name="sort"  className="px-2 py-1 bg-blue-500 text-white rounded-md" onChange={handleSortChange}>
             <option selected>Trier</option>
-            <option value="option1">Par distance</option>
+            <option value="option1">Les plus proches </option>
             <option value="option2">Option 2</option>
             <option value="option3">Option 3</option>
             </select>
@@ -48,15 +54,16 @@ const TabPointOfInterest = () => {
         <ul>
       </ul>
 
-     <ul>
-        {pointsOfInterest.map((index) => (
-        <li className='mb-10'>
-            <PointOfInterest key={index}/> 
-        </li>
-     
-        ))}
-    </ul>
-
+      <ul>
+    {pointsOfInterest.map((point, index) => (
+      
+    <PointOfInterest
+      key={index}
+      data={point}
+    />
+    ))}
+  </ul>
+  <PointOfInterest data={point} />
  </div>
   )
 }

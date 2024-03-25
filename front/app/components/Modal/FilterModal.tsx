@@ -57,7 +57,6 @@ const FilterModal: React.FC<ModalProps> = ({ onClose }) => {
             >
               Musée
             </span>
-            {/* Ajoutez d'autres filtres de la même manière */}
           </div>
           <Button type="submit" className="bg-[#5739FC] p-3 text-sm text-white rounded-xl mt-4 " onClick={onSubmit}>
             Appliquer les filtres

@@ -17,7 +17,7 @@ const Sidebar = () => {
       <div className="flex">
         <button
           className={`flex-1 py-2 rounded-tl-md rounded-bl-md ${
-            activeTab === 'pointInteret' ? 'bg-primary text-white' : 'bg-gray-300'
+            activeTab === 'pointInteret' ? 'bg-blue-500 text-white' : 'bg-gray-300'
           }`}
           onClick={() => handleTabChange('pointInteret')}
         >
