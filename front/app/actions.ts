@@ -5,7 +5,7 @@ import {Trip} from "@/app/lib/model/Trip";
 import {tripService} from "@/app/lib/service/trip.service";
 
 export async function navigateToTripById(data: FormData) {
-    redirect(`/trip/${data.get('id')}`)
+    redirect(`/trip?id=${data.get('id')}`)
 }
 
 export async function createTrip(data: FormData) {
@@ -24,5 +24,5 @@ export async function createTrip(data: FormData) {
     }
     const createdTrip: Trip = await tripService.createTrip(trip);
 
-    redirect(`/trip/${createdTrip.id}`)
+    redirect(`/trip?id=${createdTrip.id}`)
 }
