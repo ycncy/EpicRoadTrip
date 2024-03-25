@@ -1,4 +1,4 @@
-package com.epicroadtrip.tripservice.domain.usecase;
+package com.epicroadtrip.tripservice.domain.usecase.trip;
 
 import com.epicroadtrip.tripservice.domain.model.TripModel;
 import com.epicroadtrip.tripservice.domain.repository.TripRepository;

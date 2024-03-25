@@ -2,18 +2,19 @@ package com.epicroadtrip.tripservice.domain.service;
 
 import com.epicroadtrip.tripservice.application.dto.response.DeleteTripResponse;
 import com.epicroadtrip.tripservice.application.dto.response.TripResponse;
+import com.epicroadtrip.tripservice.application.dto.response.TripStopResponse;
 import com.epicroadtrip.tripservice.domain.model.TripModel;
-import com.epicroadtrip.tripservice.domain.usecase.CreateTrip;
-import com.epicroadtrip.tripservice.domain.usecase.DeleteTrip;
-import com.epicroadtrip.tripservice.domain.usecase.GetTrip;
-import com.epicroadtrip.tripservice.domain.usecase.PatchTrip;
+import com.epicroadtrip.tripservice.domain.usecase.trip.*;
 import com.epicroadtrip.tripservice.infrastructure.exception.TripNotFoundException;
+import com.epicroadtrip.tripservice.infrastructure.mapper.out.TripStopEntityMapper;
 import com.epicroadtrip.tripservice.infrastructure.persistence.entity.TripEntity;
 import com.epicroadtrip.tripservice.infrastructure.mapper.out.TripEntityMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -24,6 +25,19 @@ public class TripServiceImpl implements TripService {
     private final PatchTrip patchTrip;
     private final DeleteTrip deleteTrip;
     private final TripEntityMapper tripEntityMapper;
+    private final TripStopEntityMapper tripStopEntityMapper;
+
+    @Override
+    public List<TripStopResponse> getTripStops(UUID tripId) {
+        TripEntity tripEntity = getTrip.execute(tripId);
+
+        System.out.println(tripEntity);
+
+        return tripEntity.getTripStops().stream()
+                .map(tripStopEntityMapper::toResponse)
+                .collect(Collectors.toList());
+    }
+
 
     @Override
     public TripResponse getById(UUID tripId) {

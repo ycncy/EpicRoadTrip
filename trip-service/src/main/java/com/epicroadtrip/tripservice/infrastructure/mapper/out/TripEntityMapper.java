@@ -30,7 +30,7 @@ public class TripEntityMapper {
                 tripEntity.getEndPosition(),
                 tripEntity.getStartDatetime(),
                 tripEntity.getEndDatetime(),
-                tripEntity.getCreationDatetime()
+                tripEntity.getCreatedAt()
         );
     }
 }

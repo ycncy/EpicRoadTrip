@@ -1,4 +1,4 @@
-package com.epicroadtrip.tripservice.infrastructure.persistence.repository;
+package com.epicroadtrip.tripservice.infrastructure.persistence.repository.trip;
 
 import com.epicroadtrip.tripservice.infrastructure.persistence.entity.TripEntity;
 import org.springframework.data.repository.CrudRepository;

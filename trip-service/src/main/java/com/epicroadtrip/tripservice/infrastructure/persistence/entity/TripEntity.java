@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -35,10 +36,13 @@ public class TripEntity {
     private LocalDateTime endDatetime;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime creationDatetime;
+    private LocalDateTime createdAt;
+
+    @OneToMany(mappedBy="trip")
+    private List<TripStopEntity> tripStops;
 
     @PrePersist
     protected void onCreate() {
-        creationDatetime = LocalDateTime.now();
+        this.createdAt = LocalDateTime.now();
     }
 }
