@@ -8,7 +8,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Data
 @Entity(name="TripStop")
@@ -18,11 +17,8 @@ public class TripStopEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="tripId")
-    private UUID tripId;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="trip", referencedColumnName="id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "trip_id")
     private TripEntity trip;
 
     private StopType type;
@@ -34,6 +30,7 @@ public class TripStopEntity {
     @Convert(converter = PositionConverter.class)
     private Position position;
 
+    @Column(name="created_at")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
 

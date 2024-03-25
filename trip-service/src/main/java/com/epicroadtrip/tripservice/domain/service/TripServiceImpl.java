@@ -31,8 +31,6 @@ public class TripServiceImpl implements TripService {
     public List<TripStopResponse> getTripStops(UUID tripId) {
         TripEntity tripEntity = getTrip.execute(tripId);
 
-        System.out.println(tripEntity);
-
         return tripEntity.getTripStops().stream()
                 .map(tripStopEntityMapper::toResponse)
                 .collect(Collectors.toList());

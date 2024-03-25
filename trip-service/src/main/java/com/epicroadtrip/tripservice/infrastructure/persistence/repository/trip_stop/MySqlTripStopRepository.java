@@ -17,7 +17,7 @@ public class MySqlTripStopRepository implements TripStopRepository {
     private final SpringMySqlTripStopRepository springMySqlTripStopRepository;
     private final SpringMySqlTripRepository springMySqlTripRepository;
     private final TripStopEntityMapper tripStopEntityMapper;
-    
+
     @Override
     public TripStopEntity create(TripStopModel tripStop) {
         boolean tripEntity = springMySqlTripRepository.findById(tripStop.tripId()).isEmpty();
@@ -40,7 +40,11 @@ public class MySqlTripStopRepository implements TripStopRepository {
         TripStopEntity tripStopEntity = springMySqlTripStopRepository.findById(id)
                 .orElseThrow(() -> new TripNotFoundException("Trip-stop not found with id: " + id));
 
-        if (tripStop.tripId() != null) tripStopEntity.setTripId(tripStop.tripId());
+        if (tripStop.tripId() != null) {
+            TripEntity tripEntity = springMySqlTripRepository.findById(tripStop.tripId())
+                    .orElseThrow(() -> new TripNotFoundException("Trip not found with id: " + tripStop.tripId()));
+            tripStopEntity.setTrip(tripEntity);
+        }
         if (tripStop.name() != null) tripStopEntity.setName(tripStop.name());
         if (tripStop.type() != null) tripStopEntity.setType(tripStop.type());
         if (tripStop.position() != null) tripStopEntity.setPosition(tripStop.position());
