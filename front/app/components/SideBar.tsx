@@ -3,13 +3,12 @@ import React, { useState } from 'react';
 import TabPointOfInterest from './TabPointOfInterest';
 import TabItinerary from './TabItinerary';
 
-const Sidebar = () => {
+const Sidebar = ( { tripId }: { tripId: string }) => {
   const [activeTab, setActiveTab] = useState('pointInteret');
-
+  
   const handleTabChange = (tab: React.SetStateAction<string>) => {
     setActiveTab(tab);
   };
-
 
   return (
     <div className="bg-gray-200 h-screen w-80 flex flex-col mt-10 rounded-md">
@@ -34,10 +33,10 @@ const Sidebar = () => {
       </div>
       <div className="p-4">
         {activeTab === 'pointInteret' && (
-            <TabPointOfInterest />
+            <TabPointOfInterest tripId={tripId}/>
         )}
         {activeTab === 'itineraire' && (
-          <TabItinerary />
+          <TabItinerary tripId={tripId} />
         )}
       </div>
     </div>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const TabItinerary = () => {
+const TabItinerary = ( { tripId }: { tripId: string }) => {
   return (
     <div>TabItinerary</div>
   )

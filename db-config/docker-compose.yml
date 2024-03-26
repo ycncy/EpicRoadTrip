@@ -5,7 +5,7 @@ services:
     image: 'mysql:5.7'
     restart: 'always'
     environment:
-      MYSQL_DATABASE: 'test'
+      MYSQL_DATABASE: 'epic_road_trip'
       MYSQL_USER: 'test'
       MYSQL_PASSWORD: 'test'
       MYSQL_ROOT_PASSWORD: 'test'
@@ -16,18 +16,5 @@ services:
     volumes:
       - 'my-db-prod:/var/lib/mysql'
 
-  test_db_prod:
-    image: 'mysql:5.7'
-    restart: 'always'
-    environment:
-      MYSQL_DATABASE: "${MYSQL_TEST_DATABASE}"
-      MYSQL_USER: "${MYSQL_TEST_USER}"
-      MYSQL_PASSWORD: "${MYSQL_TEST_PASSWORD}"
-    ports:
-      - "${MYSQL_TEST_PORT}:3306"
-    volumes:
-      - 'my-test-db-prod:/var/lib/mysql'
-
 volumes:
   my-db-prod:
-  my-test-db-prod:
