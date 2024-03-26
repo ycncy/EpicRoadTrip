@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import TabPointOfInterest from './TabPointOfInterest';
 import TabItinerary from './TabItinerary';
 
-const Sidebar = ( { tripId }: { tripId: string }) => {
+const Sidebar = (props: {tripId: string}) => {
   const [activeTab, setActiveTab] = useState('pointInteret');
   
   const handleTabChange = (tab: React.SetStateAction<string>) => {
@@ -11,7 +11,7 @@ const Sidebar = ( { tripId }: { tripId: string }) => {
   };
 
   return (
-    <div className="bg-gray-200 h-screen w-1/3 flex flex-col rounded-md">
+    <div className="bg-gray-200 h-screen w-1/3 rounded-r-xl flex flex-col rounded-md">
     <div className="flex-grow">
       <div className="flex">
         <button
@@ -33,10 +33,10 @@ const Sidebar = ( { tripId }: { tripId: string }) => {
       </div>
       <div className="py-2">
         {activeTab === 'pointInteret' && (
-            <TabPointOfInterest tripId={tripId}/>
+            <TabPointOfInterest tripId={props.tripId}/>
         )}
         {activeTab === 'itineraire' && (
-          <TabItinerary tripId={tripId} />
+          <TabItinerary tripId={props.tripId} />
         )}
       </div>
     </div>

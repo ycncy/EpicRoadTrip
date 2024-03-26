@@ -11,7 +11,7 @@ import 'dayjs/locale/fr';
 import Image from "next/image";
 import {TripStop} from "@/app/lib/model/TripStop";
 
-const TabItinerary = (props) => {
+const TabItinerary = (props: {tripId: string}) => {
     const [trip, setTrip] = useState<Trip>();
     const [tripStops, setTripStops] = useState<TripStop[]>([])
     const [startLocation, setStartLocation] = useState();
