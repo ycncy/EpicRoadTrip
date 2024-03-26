@@ -11,7 +11,7 @@ import 'dayjs/locale/fr';
 import Image from "next/image";
 import {TripStop} from "@/app/lib/model/TripStop";
 
-const TabItinerary = (props) => {
+const TabItinerary = (props: { tripId: string; }) => {
     const [trip, setTrip] = useState<Trip>();
     const [tripStops, setTripStops] = useState<TripStop[]>([])
     const [startLocation, setStartLocation] = useState();
@@ -39,8 +39,8 @@ const TabItinerary = (props) => {
         <div className="flex flex-col gap-4">
             {
                 trip?.startDatetime && trip?.endDatetime ? <div className="flex justify-between px-2">
-                    <p>{dayjs(trip?.startDatetime).locale('fr').format('D MMMM YYYY, HH:mm')}</p>
-                    <p>{dayjs(trip?.endDatetime).locale('fr').format('D MMMM YYYY, HH:mm')}</p>
+                    <p className="text-lg ">{dayjs(trip?.startDatetime).locale('fr').format('D MMMM YYYY, HH:mm')}</p>
+                    <p className="text-lg">{dayjs(trip?.endDatetime).locale('fr').format('D MMMM YYYY, HH:mm')}</p>
                 </div> : <></>
             }
             <div className="flex justify-start items-center gap-8 p-4 bg-white">

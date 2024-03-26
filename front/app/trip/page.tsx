@@ -13,7 +13,7 @@ const TripPage = () => {
         <div className="bg-gray-100 min-h-screen">
             <Navbar/>
             <div className="container mx-auto flex">
-                <Sidebar tripId={searchParams.get("id")}/>
+                <Sidebar tripId={searchParams.get("id") ?? ""}/>
                 <div className="w-full">
                     <Image
                         src={Map}
