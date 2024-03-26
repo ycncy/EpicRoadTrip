@@ -1,6 +1,6 @@
-import CreateTripForm from "@/app/components/TripForms/CreateTripForm";
+import CreateTripForm from "@/app/components/Trip/Forms/CreateTripForm";
 import React from "react";
-import FetchTripForm from "@/app/components/TripForms/FetchTripForm";
+import FetchTripForm from "@/app/components/Trip/Forms/FetchTripForm";
 
 export default function Home() {
     return (

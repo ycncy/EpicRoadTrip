@@ -11,11 +11,11 @@ const Sidebar = ( { tripId }: { tripId: string }) => {
   };
 
   return (
-    <div className="bg-gray-200 h-screen w-80 flex flex-col mt-10 rounded-md">
-    <div className="flex-grow mt-0">
+    <div className="bg-gray-200 h-screen w-1/3 flex flex-col rounded-md">
+    <div className="flex-grow">
       <div className="flex">
         <button
-          className={`flex-1 py-2 rounded-tl-md rounded-bl-md ${
+          className={`flex-1 py-2 ${
             activeTab === 'pointInteret' ? 'bg-blue-500 text-white' : 'bg-gray-300'
           }`}
           onClick={() => handleTabChange('pointInteret')}
@@ -23,7 +23,7 @@ const Sidebar = ( { tripId }: { tripId: string }) => {
           Point d'Intérêt
         </button>
         <button
-          className={`flex-1 py-2 rounded-tr-md rounded-br-md ${
+          className={`flex-1 py-2 ${
             activeTab === 'itineraire' ? 'bg-blue-500 text-white' : 'bg-gray-300'
           }`}
           onClick={() => handleTabChange('itineraire')}
@@ -31,7 +31,7 @@ const Sidebar = ( { tripId }: { tripId: string }) => {
           Itinéraire
         </button>
       </div>
-      <div className="p-4">
+      <div className="py-2">
         {activeTab === 'pointInteret' && (
             <TabPointOfInterest tripId={tripId}/>
         )}

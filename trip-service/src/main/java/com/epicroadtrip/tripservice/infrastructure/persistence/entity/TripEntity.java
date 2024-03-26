@@ -3,10 +3,8 @@ package com.epicroadtrip.tripservice.infrastructure.persistence.entity;
 import com.epicroadtrip.tripservice.domain.model.Position;
 import com.epicroadtrip.tripservice.infrastructure.persistence.PositionConverter;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.hypersistence.utils.hibernate.type.json.JsonType;
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.Type;
 
 import java.time.LocalDateTime;
 import java.util.List;
