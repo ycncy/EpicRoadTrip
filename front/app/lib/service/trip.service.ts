@@ -3,11 +3,11 @@ import {DeleteResponse} from "@/app/lib/model/DeleteResponse";
 import axios from "axios";
 
 const axiosService = axios.create({
-    baseURL: "http://localhost:8080/api"
+    baseURL: "http://localhost:8080"
 })
 
 const createTrip = async (trip: Trip): Promise<Trip> => {
-    const response = await axiosService.post("", trip);
+    const response = await axiosService.post("/trip", trip);
 
     if (response.status === 201) return response.data;
 }
