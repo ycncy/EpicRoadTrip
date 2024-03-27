@@ -13,13 +13,13 @@ const createTrip = async (trip: Trip): Promise<Trip> => {
     if (response.status === 201) return response.data;
 }
 
-const getTripStops = async (tripId: string): Promise<TripStop[]> => {
+const getTripStops = async (tripId: string | null): Promise<TripStop[]> => {
     const response = await axiosService.get(`/${tripId}/stops`);
 
     if (response.status !== 404) return response.data;
 }
 
-const getTripById = async (tripId: string): Promise<Trip> => {
+const getTripById = async (tripId: string | null): Promise<Trip> => {
     const response = await axiosService.get(`/${tripId}`);
 
     if (response.status !== 404) return response.data;

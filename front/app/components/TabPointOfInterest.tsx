@@ -5,7 +5,7 @@ import PointOfInterest from './PointOfInterest';
 import SortModal from './Modal/FilterModal';
 import { tripService } from '../lib/service/trip.service';
 
-const TabPointOfInterest = ({ tripId }: { tripId: string }) => {
+const TabPointOfInterest = (props: {tripId: string}) => {
   const [isSortModalOpen, setIsFilterModalOpen] = useState(false);
   const [pointsOfInterest, setPointsOfInterest] = useState<any[]>([]);
   const [trip, setTrip] = useState<any | null>(null);
@@ -13,10 +13,8 @@ const TabPointOfInterest = ({ tripId }: { tripId: string }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const tripData = await tripService.getTripById(tripId);
+        const tripData = await tripService.getTripById(props.tripId);
         setTrip(tripData);
-        console.log("aa",tripData);
-
         const response = await fetch("https://data.datatourisme.gouv.fr/10/000ce9fa-eaca-3d78-a395-8798b5965cbc");
         const data = await response.json();
         setPointsOfInterest(data);
@@ -26,7 +24,7 @@ const TabPointOfInterest = ({ tripId }: { tripId: string }) => {
     };
 
     fetchData();
-  }, [tripId]);
+  }, [props.tripId]);
 
   const handleOpenFilterModal = () => {
     setIsFilterModalOpen(true);

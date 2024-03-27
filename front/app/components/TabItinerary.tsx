@@ -11,7 +11,7 @@ import 'dayjs/locale/fr';
 import Image from "next/image";
 import {TripStop} from "@/app/lib/model/TripStop";
 
-const TabItinerary = (props: { tripId: string; }) => {
+const TabItinerary = (props: {tripId: string}) => {
     const [trip, setTrip] = useState<Trip>();
     const [tripStops, setTripStops] = useState<TripStop[]>([])
     const [startLocation, setStartLocation] = useState();
@@ -53,8 +53,8 @@ const TabItinerary = (props: { tripId: string; }) => {
                     />
                 </div>
                 <div>
-                    <h1 className="text-xl font-bold">Point de départ</h1>
-                    <h2 className="text-lg">{startLocation}</h2>
+                    <h1 className="text-lg font-bold">Point de départ</h1>
+                    <h2 className="text-md">{startLocation}</h2>
                 </div>
             </div>
             {
@@ -65,14 +65,14 @@ const TabItinerary = (props: { tripId: string; }) => {
                                 <div className="rounded-full bg-blue-400 w-12 h-12 p-3 flex justify-center">
                                     <Image
                                         src={Accommodation}
-                                        width="32"
-                                        height="32"
+                                        width="24"
+                                        height="24"
                                         alt="finish"
                                     />
                                 </div>
                                 <div>
-                                    <h1 className="text-lg font-bold">{tripStop.name}</h1>
-                                    <h2 className="text-md">{tripStop.description}</h2>
+                                    <h1 className="text-md font-bold">{tripStop.name}</h1>
+                                    <h2 className="text-sm">{tripStop.description}</h2>
                                 </div>
                             </div>
                         )
@@ -89,8 +89,8 @@ const TabItinerary = (props: { tripId: string; }) => {
                     />
                 </div>
                 <div>
-                    <h1 className="text-xl font-bold">Point d'arrivée</h1>
-                    <h2 className="text-lg">{endLocation}</h2>
+                    <h1 className="text-lg font-bold">Point d'arrivée</h1>
+                    <h2 className="text-md">{endLocation}</h2>
                 </div>
             </div>
         </div>
