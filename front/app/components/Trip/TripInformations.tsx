@@ -110,7 +110,7 @@ const TripInformations = (props) => {
     }
 
     return (
-        <div className="overflow-y-auto max-h-screen">
+        <div>
             <div className="p-6 flex justify-between">
                 <div>
                     <p className="text-lg font-bold">De</p>

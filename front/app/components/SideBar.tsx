@@ -12,7 +12,7 @@ const Sidebar = (props: { tripId: string }) => {
     };
 
     return (
-        <div className="bg-gray-200 min-h-screen w-1/3 flex-grow">
+        <div className="bg-gray-200 h-screen overflow-y-auto w-1/3 flex-grow">
             <div className="flex">
                 <button
                     className={`flex-1 py-2 ${

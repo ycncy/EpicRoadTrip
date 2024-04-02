@@ -9,11 +9,10 @@ const TripPage = () => {
     const searchParams = useSearchParams();
 
     return (
-        <div className="bg-gray-100 flex">
+        <div className="bg-gray-100 flex overflow-hidden">
             <Sidebar tripId={searchParams.get("id")}/>
             <Map tripId={searchParams.get("id")}/>
         </div>
-
     )
 }
 
