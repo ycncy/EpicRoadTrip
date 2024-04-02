@@ -2,6 +2,7 @@ import {Trip} from "@/app/lib/model/Trip";
 import {DeleteResponse} from "@/app/lib/model/DeleteResponse";
 import axios from "axios";
 import {TripStop} from "@/app/lib/model/TripStop";
+import dayjs from "dayjs";
 
 const axiosService = axios.create({
     baseURL: "http://localhost:8080/trip"
@@ -31,7 +32,13 @@ const deleteTripById = async (tripId: string): Promise<DeleteResponse> => {
     if (response.status !== 404) return response.data;
 }
 
-const patchTripById = async (tripId: string, tripPatchModel: Partial<Trip>): Promise<Trip> => {
+const patchTripById = async (tripId: string | undefined, tripPatchModel: {
+    startDatetime: dayjs.Dayjs | null;
+    startLocation: {} | null;
+    title: string | null;
+    endLocation: {} | null;
+    endDatetime: dayjs.Dayjs | null;
+}): Promise<Trip> => {
     const response = await axiosService.patch(`/${tripId}`, tripPatchModel);
 
     if (response.status !== 404) return response.data;
