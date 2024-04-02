@@ -111,7 +111,7 @@ const TripInformations = (props) => {
 
     return (
         <div className="overflow-y-auto max-h-screen">
-            <div className="p-8 flex justify-between">
+            <div className="p-6 flex justify-between">
                 <div>
                     <p className="text-lg font-bold">De</p>
                     <p className="text-md">{startLocation}</p>
@@ -274,24 +274,26 @@ const TripInformations = (props) => {
                     </Box>
                 }
             </div>
-            <div className="p-4 flex gap-2 justify-self-end">
-                <button
-                    onClick={handleSubmit}
-                    className="w-full bg-[#5739FC] text-md h-full p-2 text-white rounded-xl">
-                    Modifier
-                </button>
-                <button
-                    onClick={() => setFormData({
-                        startLocation: trip?.startPosition,
-                        endLocation: trip?.endPosition,
-                        title: trip?.title,
-                        startDatetime: dayjs(trip?.startDatetime),
-                        endDatetime: dayjs(trip?.endDatetime)
-                    })}
-                    className="w-full border-2 border-gray-500 text-md h-full p-2 text-black rounded-xl">
-                    Reset
-                </button>
-            </div>
+            {
+                editMode && <div className="p-4 flex gap-2 justify-self-end">
+                    <button
+                        onClick={handleSubmit}
+                        className="w-full bg-[#5739FC] text-md h-full p-2 text-white rounded-xl">
+                        Modifier
+                    </button>
+                    <button
+                        onClick={() => setFormData({
+                            startLocation: trip?.startPosition,
+                            endLocation: trip?.endPosition,
+                            title: trip?.title,
+                            startDatetime: dayjs(trip?.startDatetime),
+                            endDatetime: dayjs(trip?.endDatetime)
+                        })}
+                        className="w-full border-2 border-gray-500 text-md h-full p-2 text-black rounded-xl">
+                        Reset
+                    </button>
+                </div>
+            }
         </div>
     );
 };
