@@ -2,7 +2,7 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import PointOfInterest from './PointOfInterest';
-import SortModal from './Modal/FilterModal';
+import FilterModal from './Modal/FilterModal';
 import { tripService } from '../lib/service/trip.service';
 
 const TabPointOfInterest = (props: {tripId: string}) => {
@@ -36,7 +36,6 @@ const TabPointOfInterest = (props: {tripId: string}) => {
 
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedSortOption = event.target.value;
-    // Handle sorting logic here
   };
 
   return (
@@ -56,8 +55,8 @@ const TabPointOfInterest = (props: {tripId: string}) => {
           <option value="option3">Option 3</option>
         </select>
       </div>
-      <div className="p-4">
-        {isSortModalOpen && <SortModal onClose={handleCloseFilterModal} />}
+      <div className="p-4 ">
+        {isSortModalOpen && <FilterModal onClose={handleCloseFilterModal} />}
       </div>
       <ul>
         {pointsOfInterest.map((point, index) => (

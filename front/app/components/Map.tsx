@@ -6,7 +6,7 @@ import {Trip} from "@/app/lib/model/Trip";
 import {TripStop} from "@/app/lib/model/TripStop";
 import {tripService} from "@/app/lib/service/trip.service";
 import * as L from 'leaflet';
-import Icon from "../public/images/marker.png";
+//import Icon from "../public/images/marker.png";
 
 
 const Map = (props: {tripId: string}) => {
@@ -35,10 +35,10 @@ const Map = (props: {tripId: string}) => {
                     trip.startPosition.latitude && trip?.startPosition.longitude && (
                         <Marker
                             position={[trip.startPosition.latitude, trip?.startPosition.longitude]}
-                            icon={L.icon({
-                                iconSize: [36, 36],
-                                iconUrl: Icon.src
-                            })}
+                            // icon={L.icon({
+                            //     iconSize: [36, 36],
+                            //     iconUrl: Icon.src
+                            // })}
                         >
                             <Popup>
                                 Point de départ de votre Road Trip
@@ -50,10 +50,10 @@ const Map = (props: {tripId: string}) => {
                     trip.endPosition.latitude && trip.endPosition.longitude && (
                         <Marker
                             position={[trip.endPosition.latitude, trip.endPosition.longitude]}
-                            icon={L.icon({
-                                iconSize: [36, 36],
-                                iconUrl: Icon.src
-                            })}
+                            // icon={L.icon({
+                            //     iconSize: [36, 36],
+                            //     iconUrl: Icon.src
+                            // })}
                         >
                             <Popup>
                                 Point de départ de votre Road Trip

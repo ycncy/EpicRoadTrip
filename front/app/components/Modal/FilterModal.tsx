@@ -28,7 +28,7 @@ const FilterModal: React.FC<ModalProps> = ({ onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50">
+    <div className="bg-gray-200 h-screen  rounded-r-xl flex flex-col rounded-md">
       <div className="fixed inset-0 bg-black opacity-50"></div>
       <div className="bg-white p-4 rounded-md z-10">
         <div className="flex justify-end">
