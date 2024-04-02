@@ -278,7 +278,7 @@ const TripInformations = (props) => {
                 editMode && <div className="p-4 flex gap-2 justify-self-end">
                     <button
                         onClick={handleSubmit}
-                        className="w-full bg-[#5739FC] text-md h-full p-2 text-white rounded-xl">
+                        className="w-full border-2 border-[#5739FC] bg-[#5739FC] text-md h-full p-2 text-white rounded-xl">
                         Modifier
                     </button>
                     <button
