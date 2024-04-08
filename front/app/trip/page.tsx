@@ -18,14 +18,11 @@ const TripPage = () => {
     }
 
     return (
-        <div className="bg-gray-100 h-screen">
-            {/*<Navbar/>*/}
-            <div className="flex">
-                <Sidebar tripId={tripId}/>
-                <Map tripId={tripId}/>
-            </div>
+        <div className="bg-gray-100 flex overflow-hidden">
+            <Sidebar tripId={searchParams.get("id") ?? ""}/>
+            <Map tripId={searchParams.get("id") ?? ""}/>
         </div>
-    );
+    )
 }
 
 

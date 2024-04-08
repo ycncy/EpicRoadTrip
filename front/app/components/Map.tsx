@@ -9,7 +9,7 @@ import * as L from 'leaflet';
 //import Icon from "../public/images/marker.png";
 
 
-const Map = (props: {tripId: string}) => {
+const Map = (props: { tripId: string }) => {
     const [trip, setTrip] = useState<Trip>();
     const [tripStops, setTripStops] = useState<TripStop[]>([]);
 
@@ -26,7 +26,10 @@ const Map = (props: {tripId: string}) => {
     }, [props.tripId]);
 
     return (
-            trip !== undefined ? <MapContainer center={[trip.startPosition.latitude, trip?.startPosition.longitude]} zoom={13} className="w-screen">
+        trip !== undefined ?
+            <MapContainer center={[trip.startPosition.latitude, trip?.startPosition.longitude]} zoom={13}
+                          className="w-screen"
+            >
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

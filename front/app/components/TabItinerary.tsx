@@ -36,7 +36,7 @@ const TabItinerary = (props: {tripId: string}) => {
     }, []);
 
     return (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 py-2">
             {
                 trip?.startDatetime && trip?.endDatetime ? <div className="flex justify-between px-2">
                     <p className="text-lg ">{dayjs(trip?.startDatetime).locale('fr').format('D MMMM YYYY, HH:mm')}</p>

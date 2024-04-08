@@ -39,8 +39,8 @@ const TabPointOfInterest = (props: {tripId: string}) => {
   };
 
   return (
-    <div>
-      <h1 className="text-xl font-bold mb-4 ml-2">{trip && trip.title}</h1>
+    <div className="py-2">
+      {trip && trip.title}
       <div className="flex justify-center mb-4">
         <button onClick={handleOpenFilterModal} className="px-2 py-1 bg-blue-500 text-white rounded-md mr-14">
           <FontAwesomeIcon icon={faBars} className='mr-2' />

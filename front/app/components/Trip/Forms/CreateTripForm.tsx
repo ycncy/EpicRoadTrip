@@ -60,7 +60,6 @@ const CreateTripForm = () => {
     }
 
     const handleChange = (event) => {
-        console.log(event.target)
         const {name, value} = event.target;
         setFormData(prevFormData => ({
             ...prevFormData,
