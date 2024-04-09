@@ -2,7 +2,7 @@
 import React, {useEffect, useState} from 'react';
 import {Trip} from "@/app/lib/model/Trip";
 import {tripService} from "@/app/lib/service/trip.service";
-import Car from "@/app/public/images/car.png"
+//import Car from "@/app/public/images/car.png"
 import {TripStop} from "@/app/lib/model/TripStop";
 import Image from "next/image";
 import {Autocomplete, Box, FormControlLabel, TextField} from "@mui/material";
