@@ -5,10 +5,11 @@ import requests
 
 from place.place import Place
 
-BASE_URL = os.getenv('BASE_URL')
+BASE_URL = os.getenv('GOOGLE_PLACES_API_BASE_URL')
 
 
 def get_places_by_type(place_types: List[str], longitude: float, latitude: float):
+    print(BASE_URL)
     response = requests.post(
         BASE_URL,
         headers={

@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  places-service:
+    build: places-service
+    ports:
+      - "3002:3002"
+    volumes:
+      - ./places-service:/places-service
+    command: uvicorn main:app --reload --host 0.0.0.0 --port 3002
+    environment:
+      GOOGLE_PLACES_API_BASE_URL: ${GOOGLE_PLACES_API_BASE_URL}
+      GOOGLE_PLACES_API_KEY: ${GOOGLE_PLACES_API_KEY}
