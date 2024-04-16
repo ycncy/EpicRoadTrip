@@ -3,6 +3,8 @@ from enum import Enum
 from tkinter import Place
 from typing import Optional
 
+from pydantic import BaseModel
+
 
 class PlaceType(Enum):
     CAR_UTILITIES = 'CAR_UTILITIES'
@@ -45,33 +47,32 @@ place_type_binding = {
 }
 
 
-class Location:
+class Location(BaseModel):
     longitude: float
     latitude: float
 
 
-@dataclass
-class Place:
-    address: Optional[str]
-    location: Location
-    google_maps_url: Optional[str]
-    name: Optional[str]
-    phone_number: Optional[str]
-    website_url: Optional[str]
-    summary: Optional[str]
-    image_url: Optional[str]
-    rating: Optional[float]
+class Place(BaseModel):
+    address: Optional[str] = None
+    location: Optional[Location] = None
+    google_maps_url: Optional[str] = None
+    name: Optional[str] = None
+    phone_number: Optional[str] = None
+    website_url: Optional[str] = None
+    summary: Optional[str] = None
+    image_url: Optional[str] = None
+    rating: Optional[float] = None
 
     @classmethod
-    def from_google_api(cls, place: dict) -> Place:
+    def from_google_api(cls, place: dict) -> 'Place':
         return cls(
-            place.get("formattedAddress", None),
-            place.get("location", None),
-            place.get("googleMapsUri", None),
-            place.get("displayName", {}).get("text", None),
-            place.get("internationalPhoneNumber", None),
-            place.get("websiteUri", None),
-            place.get("editorialSummary", {}).get("text", None),
-            place.get("photos", [{}])[0].get("authorAttributions", [{}])[0].get("photoUri", None),
-            place.get("rating", None)
+            address=place.get("formattedAddress", None),
+            location=place.get("location", None),
+            google_maps_url=place.get("googleMapsUri", None),
+            name=place.get("displayName", {}).get("text", None),
+            phone_number=place.get("internationalPhoneNumber", None),
+            website_url=place.get("websiteUri", None),
+            summary=place.get("editorialSummary", {}).get("text", None),
+            image_url=place.get("photos", [{}])[0].get("authorAttributions", [{}])[0].get("photoUri", None),
+            rating=place.get("rating", None)
         )
