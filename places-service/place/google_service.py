@@ -33,4 +33,7 @@ def get_places_by_type(place_types: List[str], longitude: float, latitude: float
         })
     )
 
+    if response.json() == {}:
+        return []
+
     return [Place.from_google_api(place_data) for place_data in response.json()["places"]]

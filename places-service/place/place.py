@@ -1,4 +1,3 @@
-from dataclasses import dataclass
 from enum import Enum
 from tkinter import Place
 from typing import Optional
@@ -23,7 +22,7 @@ class PlaceType(Enum):
 
 
 place_type_binding = {
-    PlaceType.CAR_UTILITIES: ["car_dealer", "car_rental", "car_repair", "car_wish", "electric_vehicle_charging_station",
+    PlaceType.CAR_UTILITIES: ["car_dealer", "car_rental", "car_repair", "electric_vehicle_charging_station",
                               "gas_station", "parking", "rest_stop"],
     PlaceType.CULTURE: ["art_gallery", "museum", "performing_arts_theater"],
     PlaceType.ENTERTAINMENT: ["library"],
