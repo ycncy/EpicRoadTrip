@@ -8,13 +8,13 @@ from place.place import Place
 BASE_URL = os.getenv('GOOGLE_PLACES_API_BASE_URL')
 
 
-def get_places_by_type(place_types: List[str], longitude: float, latitude: float) -> List[Place]:
+def get_places_by_type(place_types: List[str], longitude: float, latitude: float, radius: float) -> List[Place]:
     response = requests.post(
         BASE_URL,
         headers={
             "Content-Type": "application/json",
             "X-Goog-Api-Key": os.getenv('GOOGLE_PLACES_API_KEY'),
-            "X-Goog-FieldMask": "places.location,places.formattedAddress,places.googleMapsUri,places.displayName,places.websiteUri,places.photos,places.internationalPhoneNumber,places.rating,places.editorialSummary"
+            "X-Goog-FieldMask": "places.id,places.location,places.formattedAddress,places.googleMapsUri,places.displayName,places.websiteUri,places.photos,places.internationalPhoneNumber,places.rating,places.editorialSummary"
         },
         data=json.dumps({
             "includedPrimaryTypes": place_types,
@@ -26,7 +26,7 @@ def get_places_by_type(place_types: List[str], longitude: float, latitude: float
                         "latitude": latitude,
                         "longitude": longitude
                     },
-                    "radius": 10000.0
+                    "radius": radius
                 }
             },
             "rankPreference": "DISTANCE"

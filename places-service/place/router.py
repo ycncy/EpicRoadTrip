@@ -16,10 +16,11 @@ async def get_place(
         place_type: PlaceType,
         latitude: float,
         longitude: float,
+        radius: float
 ) -> List[Place]:
     types_list = place_type_binding.get(place_type, None)
 
     if types_list is None:
         raise HTTPException(status_code=400, detail="Invalid place type")
     else:
-        return get_places_by_type(types_list, longitude=longitude, latitude=latitude)
+        return get_places_by_type(types_list, longitude=longitude, latitude=latitude, radius=radius)
