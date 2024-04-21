@@ -1,6 +1,8 @@
+from uuid import UUID, uuid4
+
 from passlib.context import CryptContext
-from sqlalchemy import String, Column, Integer
-from sqlalchemy.orm import DeclarativeBase, mapped_column, Mapped
+from sqlalchemy import String, Column
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 from authentication.dto import CreateUserDTO, LoginDTO
 from database.engine import Database
@@ -12,7 +14,7 @@ class Base(DeclarativeBase):
 
 class User(Base):
     __tablename__ = 'user'
-    id: Mapped[int] = Column(Integer, primary_key=True)
+    id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
     username: Mapped[str] = Column(String(50), unique=True, nullable=False)
     password: Mapped[str] = Column(String(255), nullable=False)
 

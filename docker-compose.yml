@@ -15,6 +15,20 @@ services:
       - "3306:3306"
     volumes:
       - 'mysql-db:/var/lib/mysql'
+  auth-service:
+    build: auth-service
+    ports:
+      - "3003:3003"
+    volumes:
+      - ./auth-service:/auth-service
+    command: uvicorn main:app --reload --host 0.0.0.0 --port 3003
+    environment:
+      JWT_SECRET: ${JWT_ALGORITHM}
+      JWT_ALGORITHM: ${JWT_ALGORITHM}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_SERVER: ${MYSQL_SERVER}
+      MYSQL_SCHEMA: ${MYSQL_SCHEMA}
   places-service:
     build: places-service
     ports:

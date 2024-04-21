@@ -8,7 +8,7 @@ JWT_SECRET = os.environ.get("JWT_SECRET")
 JWT_ALGORITHM = os.environ.get("JWT_ALGORITHM")
 
 
-def sign_jwt_access_token(user_id: int) -> BaseJwtResponse:
+def sign_jwt_access_token(user_id: str) -> BaseJwtResponse:
     payload = {
         "user_id": user_id,
         "expires": time.time() + 600

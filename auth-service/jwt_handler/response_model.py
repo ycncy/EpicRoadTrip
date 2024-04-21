@@ -2,5 +2,5 @@ from pydantic import BaseModel
 
 
 class BaseJwtResponse(BaseModel):
-    user_id: int
+    user_id: str
     access_token: str

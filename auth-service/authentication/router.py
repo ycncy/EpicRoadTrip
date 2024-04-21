@@ -19,7 +19,7 @@ def login(login_dto: LoginDTO):
             status_code=400,
             detail="Invalid username"
         )
-    return sign_jwt_access_token(user.id)
+    return sign_jwt_access_token(str(user.id))
 
 
 @authentication_router.post("/register")
