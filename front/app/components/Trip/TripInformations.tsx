@@ -5,7 +5,7 @@ import {tripService} from "@/app/lib/service/trip.service";
 //import Car from "@/app/public/images/car.png"
 import {TripStop} from "@/app/lib/model/TripStop";
 import Image from "next/image";
-import {Autocomplete, Box, FormControlLabel, TextField} from "@mui/material";
+import {Autocomplete, Box, Button, FormControlLabel, TextField} from "@mui/material";
 import dayjs from "dayjs";
 import {locationApiService} from "@/app/lib/service/location-api.service";
 import {LocalizationProvider} from "@mui/x-date-pickers";
@@ -13,6 +13,8 @@ import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {DateTimePicker} from "@mui/x-date-pickers/DateTimePicker";
 import { Switch } from '@mui/material';
 import {useRouter} from "next/navigation";
+import { faDownload } from '@fortawesome/free-solid-svg-icons';
+import jsPDF from 'jspdf';
 
 const TripInformations = (props) => {
     const [trip, setTrip] = useState<Trip>();
@@ -109,6 +111,32 @@ const TripInformations = (props) => {
         router.refresh();
     }
 
+
+    function handleExport(): void {
+        const pdf = new jsPDF();
+
+        pdf.text(`Titre: ${formData.title}`, 10, 10);
+        pdf.text(`Date de départ: ${formData.startDatetime.format('YYYY-MM-DD HH:mm:ss')}`, 10, 20);
+        pdf.text(`Date d'arrivée: ${formData.endDatetime.format('YYYY-MM-DD HH:mm:ss')}`, 10, 30);
+        pdf.text(`Ville de départ: ${startLocation}`, 10, 40);
+        pdf.text(`Ville d'arrivée: ${endLocation}`, 10, 50);
+
+        pdf.save(`${formData.title}.pdf`);
+    }
+
+
+    function handleShare(): void {
+        const currentURL = window.location.href;
+        navigator.clipboard.writeText(currentURL)
+        .then(() => {
+          console.log("Trip link copied to clipboard:", currentURL);
+          alert("Trip link copied to clipboard: " + currentURL);
+        })
+        .catch((error) => {
+          console.error("Failed to copy trip link to clipboard:", error);
+        });
+    }
+
     return (
         <div>
             <div className="p-6 flex justify-between">
@@ -116,13 +144,13 @@ const TripInformations = (props) => {
                     <p className="text-lg font-bold">De</p>
                     <p className="text-md">{startLocation}</p>
                 </div>
-                <Image
+                {/* <Image
                     src={Car}
                     className="scale-x-[-1]"
                     width="48"
                     height={undefined}
                     alt="finish"
-                />
+                /> */}
                 <div>
                     <p className="text-lg text-right font-bold">À</p>
                     <p className="text-md">{endLocation}</p>
@@ -294,6 +322,22 @@ const TripInformations = (props) => {
                     </button>
                 </div>
             }
+
+                <button
+                onClick={handleShare}
+                className="w-full border-2 border-gray-500 text-md h-full p-2 text-black rounded-xl mt-10"
+                >
+            Partager
+            </button> 
+
+            <button
+                onClick={handleExport}
+                className="w-full border-2 border-gray-500 text-md h-full p-2 text-black rounded-xl mt-10"
+                >
+            Exporter
+            </button>  
+                
+
         </div>
     );
 };
