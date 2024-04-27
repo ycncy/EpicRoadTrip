@@ -1,0 +1,51 @@
+version: "3.8"
+
+services:
+  mysql-db:
+    image: 'mysql:5.7'
+    restart: 'always'
+    environment:
+      MYSQL_DATABASE: 'epic_road_trip'
+      MYSQL_USER: 'test'
+      MYSQL_PASSWORD: 'test'
+      MYSQL_ROOT_PASSWORD: 'test'
+      MYSQL_ALLOW_EMPTY_PASSWORD: null
+      MYSQL_RANDOM_ROOT_PASSWORD: null
+    ports:
+      - "3306:3306"
+    volumes:
+      - 'mysql-db:/var/lib/mysql'
+  # auth-service:
+  #   build: auth-service
+  #   ports:
+  #     - "3003:3003"
+  #   volumes:
+  #     - ./auth-service:/auth-service
+  #   command: uvicorn main:app --reload --host 0.0.0.0 --port 3003
+  #   environment:
+  #     JWT_SECRET: ${JWT_ALGORITHM}
+  #     JWT_ALGORITHM: ${JWT_ALGORITHM}
+  #     MYSQL_USER: ${MYSQL_USER}
+  #     MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+  #     MYSQL_SERVER: ${MYSQL_SERVER}
+  #     MYSQL_SCHEMA: ${MYSQL_SCHEMA}
+  places-service:
+    build: places-service
+    ports:
+      - "3002:3002"
+    volumes:
+      - ./places-service:/places-service
+    command: uvicorn main:app --reload --host 0.0.0.0 --port 3002
+    environment:
+      GOOGLE_PLACES_API_BASE_URL: ${GOOGLE_PLACES_API_BASE_URL}
+      GOOGLE_PLACES_API_KEY: ${GOOGLE_PLACES_API_KEY}
+  trip-service:
+    build: trip-service
+    depends_on:
+      - mysql-db
+    restart: on-failure
+    ports:
+      - "8080:8080"
+
+volumes:
+  mysql-db:
