@@ -33,7 +33,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
-          context: .
+          context: ./places-service
           push: true
           tags: gcr.io/${{ secrets.PROJECT_ID }}/streamlit-app:latest  # Tag the image with 'latest'
 
