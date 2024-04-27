@@ -38,7 +38,7 @@ jobs:
           tags: gcr.io/${{ secrets.PROJECT_ID }}/streamlit-app:latest  # Tag the image with 'latest'
 
       - name: Deploy to Cloud Run  # Deploy the 'latest' image to Cloud Run
-        uses: google-github-actions/deploy-cloudrun@main
+        uses: google-github-actions/deploy-cloudrun@v1
         with:
           service: streamlit-app
           image: gcr.io/${{ secrets.PROJECT_ID }}/streamlit-app:latest  # Use the 'latest' image for deployment
