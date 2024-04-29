@@ -46,14 +46,14 @@ const TabPointOfInterest = (props: {tripId: string}) => {
           <FontAwesomeIcon icon={faBars} className='mr-2' />
           Filtrer
         </button>
-        <select id="sort" name="sort" className="px-2 py-1 bg-blue-500 text-white rounded-md" onChange={handleSortChange}>
+        {/* <select id="sort" name="sort" className="px-2 py-1 bg-blue-500 text-white rounded-md" onChange={handleSortChange}>
           <option value="" disabled selected>
             Trier
           </option>
           <option value="option1">Les plus proches</option>
           <option value="option2">Option 2</option>
           <option value="option3">Option 3</option>
-        </select>
+        </select> */}
       </div>
       <div className="p-4 ">
         {isSortModalOpen && <FilterModal onClose={handleCloseFilterModal} />}

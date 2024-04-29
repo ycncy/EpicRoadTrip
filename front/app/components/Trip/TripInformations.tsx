@@ -116,7 +116,7 @@ const TripInformations = (props) => {
     function handleExport(): void {
         const pdfModel = new TripPDF();
 
-        pdfModel.addTitle("Informations du voyage");
+        pdfModel.addTitle("Mon Epic Road Trip");
         pdfModel.addText(`Titre: ${formData.title}`, 10, 30);
         pdfModel.addText(`Date de départ: ${formData.startDatetime.format('YYYY-MM-DD HH:mm:ss')}`, 10, 40);
         pdfModel.addText(`Date d'arrivée: ${formData.endDatetime.format('YYYY-MM-DD HH:mm:ss')}`, 10, 50);
