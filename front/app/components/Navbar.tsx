@@ -9,7 +9,7 @@ const Navbar = () => {
             <div className="hidden md:block">
              <ul className="flex space-x-4">
                <li>
-               <a href="/tripList/Mp" className="text-white hover:text-gray-300">Mes Trips </a>
+               <a href="/savedTrips" className="text-white hover:text-gray-300">Mes Trips </a>
                </li>
                <li>
                  <h1  className="text-white hover:text-gray-300">Username
