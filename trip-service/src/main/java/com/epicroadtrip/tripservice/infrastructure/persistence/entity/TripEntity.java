@@ -24,6 +24,8 @@ public class TripEntity {
 
     private String title;
 
+    private String userId;
+
     private String description;
 
     @Column(name="start_position")

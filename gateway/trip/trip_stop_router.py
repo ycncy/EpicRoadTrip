@@ -1,9 +1,10 @@
 from uuid import UUID
 
 import requests
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from fastapi.params import Path
 
+from middleware.jwt_bearer import JWTBearer
 from trip.dto import TripStopResponseDTO, CreateTripStopDTO, PatchTripDTO
 
 trip_stop_router = APIRouter(
@@ -11,11 +12,11 @@ trip_stop_router = APIRouter(
     tags=["Trip Stop"],
 )
 
-TRIP_SERVICE_URL = "http://localhost:8080/trip-stop"
+TRIP_SERVICE_URL = "http://localhost:8080/trip-stops"
 
 
-@trip_stop_router.get("/{trip_stop_id}", response_model=TripStopResponseDTO)
-def get_trip_stop(
+@trip_stop_router.get("/{trip_stop_id}", dependencies=[Depends(JWTBearer())], response_model=TripStopResponseDTO)
+async def get_trip_stop(
         trip_stop_id: int
 ) -> TripStopResponseDTO:
     trip_stop_response = requests.get(f"{TRIP_SERVICE_URL}/{trip_stop_id}")
@@ -26,8 +27,8 @@ def get_trip_stop(
     return TripStopResponseDTO.from_json(trip_stop_response.json())
 
 
-@trip_stop_router.post("", response_model=TripStopResponseDTO)
-def create_trip_stop(
+@trip_stop_router.post("", dependencies=[Depends(JWTBearer())], response_model=TripStopResponseDTO)
+async def create_trip_stop(
         create_trip_stop_dto: CreateTripStopDTO,
         trip_id: UUID = Path(..., example="550e8400-e29b-41d4-a716-446655440000")
 ) -> TripStopResponseDTO:
@@ -45,8 +46,8 @@ def create_trip_stop(
     return TripStopResponseDTO.from_json(trip_stop_response.json())
 
 
-@trip_stop_router.patch("/{trip_stop_id}", response_model=TripStopResponseDTO)
-def patch_trip_stop(
+@trip_stop_router.patch("/{trip_stop_id}", dependencies=[Depends(JWTBearer())], response_model=TripStopResponseDTO)
+async def patch_trip_stop(
         trip_stop_id: int,
         patch_trip_stop_dto: PatchTripDTO
 ) -> TripStopResponseDTO:
@@ -61,8 +62,8 @@ def patch_trip_stop(
     return TripStopResponseDTO.from_json(trip_stop_response.json())
 
 
-@trip_stop_router.delete("/{trip_stop_id}")
-def delete_trip_stop(
+@trip_stop_router.delete("/{trip_stop_id}", dependencies=[Depends(JWTBearer())])
+async def delete_trip_stop(
         trip_stop_id: int
 ):
     trip_stop_response = requests.delete(

@@ -7,6 +7,7 @@ from core.position import Position
 
 class TripResponseDTO(BaseModel):
     id: str = Field(example="550e8400-e29b-41d4-a716-446655440000")
+    user_id: str = Field(example="2c0dcffaa7e3412492b79fd2f8a5f298")
     title: str = Field(example="Paris-Marseille")
     description: str = Field(example="Voyage été 2024")
     startPosition: Position
@@ -24,6 +25,7 @@ class TripResponseDTO(BaseModel):
 
         return cls(
             id=data_json["id"],
+            user_id=data_json["userId"],
             title=data_json["title"],
             description=data_json["description"],
             startPosition=start_position,
@@ -36,6 +38,7 @@ class TripResponseDTO(BaseModel):
 
 class CreateTripDTO(BaseModel):
     title: str = Field(example="Paris-Marseille")
+    userId: str = Field(example="2c0dcffaa7e3412492b79fd2f8a5f298")
     description: Optional[str] = Field(default=None, example="Voyage été 2024")
     startPosition: Position
     endPosition: Position
@@ -45,6 +48,7 @@ class CreateTripDTO(BaseModel):
 
 class PatchTripDTO(BaseModel):
     title: str = Field(default=None, example="Paris-Marseille")
+    userId: str = Field(example="2c0dcffaa7e3412492b79fd2f8a5f298")
     description: Optional[str] = Field(default=None, example="Voyage été 2024")
     startPosition: Position = None
     endPosition: Position = None

@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/trip-stop")
+@RequestMapping("/trip-stops")
 @Tag(name = "Trip Stop", description = "Add or remove stops from a Trip")
 @RequiredArgsConstructor
 public class TripStopController {

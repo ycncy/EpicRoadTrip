@@ -7,6 +7,7 @@ import java.util.UUID;
 
 public record TripResponse (
         UUID id,
+        String userId,
         String title,
         String description,
         Position startPosition,

@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/trip")
+@RequestMapping("/trips")
 @Tag(name = "Trip", description = "Complete trip management")
 @RequiredArgsConstructor
 public class TripController {
@@ -34,6 +34,17 @@ public class TripController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(tripService.getTripStops(tripId));
+    }
+
+    @Operation(summary = "Get all user's trips", description = "Retrieves all user's trip given its ID.")
+    @GetMapping("/users/{user-id}")
+    public ResponseEntity<List<TripResponse>> getUserTrips(
+            @Schema(description = "User ID", example = "2c0dcffaa7e3412492b79fd2f8a5f298", requiredMode = Schema.RequiredMode.REQUIRED)
+            @PathVariable("user-id") String userId
+    ) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(tripService.getTripsByUserId(userId));
     }
 
     @Operation(summary = "Get a trip by ID", description = "Retrieves detailed information about a trip given its ID.")
