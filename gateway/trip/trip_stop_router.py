@@ -2,7 +2,7 @@ from uuid import UUID
 
 import requests
 from fastapi import APIRouter, HTTPException, Depends
-from fastapi.params import Path
+from fastapi.params import Param
 
 from middleware.jwt_bearer import JWTBearer
 from trip.dto import TripStopResponseDTO, CreateTripStopDTO, PatchTripDTO
@@ -12,7 +12,7 @@ trip_stop_router = APIRouter(
     tags=["Trip Stop"],
 )
 
-TRIP_SERVICE_URL = "http://localhost:8080/trip-stops"
+TRIP_SERVICE_URL = "http://host.docker.internal:8080/trip-stops"
 
 
 @trip_stop_router.get("/{trip_stop_id}", dependencies=[Depends(JWTBearer())], response_model=TripStopResponseDTO)
@@ -30,7 +30,7 @@ async def get_trip_stop(
 @trip_stop_router.post("", dependencies=[Depends(JWTBearer())], response_model=TripStopResponseDTO)
 async def create_trip_stop(
         create_trip_stop_dto: CreateTripStopDTO,
-        trip_id: UUID = Path(..., example="550e8400-e29b-41d4-a716-446655440000")
+        trip_id: UUID = Param(..., example="550e8400-e29b-41d4-a716-446655440000")
 ) -> TripStopResponseDTO:
     trip_stop_response = requests.post(
         f"{TRIP_SERVICE_URL}",

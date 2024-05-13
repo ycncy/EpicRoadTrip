@@ -2,7 +2,6 @@ FROM python:3.10-slim-buster AS base
 
 WORKDIR /auth-service
 
-# Update and install necessary packages including tkinter
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     build-essential \

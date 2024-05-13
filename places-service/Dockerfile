@@ -2,7 +2,6 @@ FROM python:3.10-slim-buster AS base
 
 WORKDIR /places-service
 
-# Update and install necessary packages including tkinter
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     build-essential \
@@ -13,5 +12,3 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
-
-CMD exec uvicorn main:app --host 0.0.0.0 --port 3002 --workers 1

@@ -13,7 +13,7 @@ trip_router = APIRouter(
     tags=["Trip"],
 )
 
-TRIP_SERVICE_URL = "http://localhost:8080/trips"
+TRIP_SERVICE_URL = "http://host.docker.internal:8080/trips"
 
 
 @trip_router.get("/{trip_id}/stops", response_model=List[TripStopResponseDTO])
@@ -42,7 +42,7 @@ async def get_trip(
     return TripResponseDTO.from_json(trip_response.json())
 
 
-@trip_router.get("/users/{user_id}", dependencies=[Depends(JWTBearer())], response_model=TripResponseDTO)
+@trip_router.get("/users/{user_id}", dependencies=[Depends(JWTBearer())], response_model=List[TripResponseDTO])
 async def get_trips_by_user_id(
         user_id: str = Path(..., example="2c0dcffaa7e3412492b79fd2f8a5f298")
 ):

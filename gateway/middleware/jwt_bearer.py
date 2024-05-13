@@ -36,5 +36,5 @@ class JWTBearer(HTTPBearer):
 
 
 def fetch_user(user_id: str):
-    user = requests.get(f"http://localhost:3003/user/{user_id}")
+    user = requests.get(f"http://host.docker.internal:5001/user/{user_id}")
     return user.json()

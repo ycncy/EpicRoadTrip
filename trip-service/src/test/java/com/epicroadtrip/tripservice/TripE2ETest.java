@@ -42,6 +42,7 @@ public class TripE2ETest {
     public void testCreateTrip() {
         CreatePatchTripDTO trip = new CreatePatchTripDTO(
                 "Test",
+                "2c0dcffaa7e3412492b79fd2f8a5f298",
                 "Test description",
                 new Position(0.00F, 0.00F),
                 new Position(0.00F, 0.00F),
@@ -61,6 +62,7 @@ public class TripE2ETest {
     public void testUpdateTrip() {
         CreatePatchTripDTO createRequest = new CreatePatchTripDTO(
                 "Test",
+                "2c0dcffaa7e3412492b79fd2f8a5f298",
                 "Test description",
                 new Position(0.00F, 0.00F),
                 new Position(1.00F, 1.00F),
@@ -73,6 +75,7 @@ public class TripE2ETest {
 
         CreatePatchTripDTO updateRequest = new CreatePatchTripDTO(
                 "Updated Test",
+                "2c0dcffaa7e3412492b79fd2f8a5f298",
                 "Updated Description",
                 new Position(2.00F, 2.00F),
                 new Position(3.00F, 3.00F),
@@ -96,6 +99,7 @@ public class TripE2ETest {
     public void testDeleteTrip() {
         CreatePatchTripDTO createRequest = new CreatePatchTripDTO(
                 "Trip to Delete",
+                "2c0dcffaa7e3412492b79fd2f8a5f298",
                 "Description",
                 new Position(10.00F, 10.00F),
                 new Position(20.00F, 20.00F),
@@ -116,6 +120,7 @@ public class TripE2ETest {
     public void testGetTrip() {
         CreatePatchTripDTO createRequest = new CreatePatchTripDTO(
                 "Trip to Retrieve",
+                "2c0dcffaa7e3412492b79fd2f8a5f298",
                 "Description",
                 new Position(30.00F, 30.00F),
                 new Position(40.00F, 40.00F),

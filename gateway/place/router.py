@@ -11,7 +11,7 @@ place_router = APIRouter(
     tags=["Places"],
 )
 
-PLACES_SERVICE_URL = "http://localhost:3002/places"
+PLACE_SERVICE_URL = "http://host.docker.internal:5002/places"
 
 
 @place_router.get("", dependencies=[Depends(JWTBearer())])
@@ -22,7 +22,7 @@ def get_places(
         radius: float
 ) -> List[PlaceResponseDTO]:
     trip_response = requests.get(
-        f"{PLACES_SERVICE_URL}",
+        f"{PLACE_SERVICE_URL}",
         params={
             "place_type": place_type.value,
             "latitude": latitude,
