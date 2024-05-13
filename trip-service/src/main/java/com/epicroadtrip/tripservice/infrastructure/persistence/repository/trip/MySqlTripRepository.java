@@ -8,6 +8,7 @@ import com.epicroadtrip.tripservice.infrastructure.mapper.out.TripEntityMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.UUID;
 
 @Repository
@@ -28,6 +29,11 @@ public class MySqlTripRepository implements TripRepository {
     public TripEntity get(UUID tripId) {
         return springMySqlTripRepository.findById(tripId)
                 .orElseThrow(() -> new TripNotFoundException("Trip not found with ID : " + tripId));
+    }
+
+    @Override
+    public List<TripEntity> getTripsByUserId(String userId) {
+        return springMySqlTripRepository.findByUserId(userId);
     }
 
     @Override

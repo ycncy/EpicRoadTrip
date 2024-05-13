@@ -12,6 +12,7 @@ public class TripEntityMapper {
         TripEntity tripEntity = new TripEntity();
 
         tripEntity.setTitle(tripModel.title());
+        tripEntity.setUserId(tripModel.userId());
         tripEntity.setDescription(tripModel.description());
         tripEntity.setStartPosition(tripModel.startPosition());
         tripEntity.setEndPosition(tripModel.endPosition());
@@ -24,6 +25,7 @@ public class TripEntityMapper {
     public TripResponse toResponse(TripEntity tripEntity) {
         return new TripResponse(
                 tripEntity.getId(),
+                tripEntity.getUserId(),
                 tripEntity.getTitle(),
                 tripEntity.getDescription(),
                 tripEntity.getStartPosition(),

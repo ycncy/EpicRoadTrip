@@ -11,6 +11,7 @@ public class TripDtoMapper {
     public TripModel toDomain (CreatePatchTripDTO tripRequest) {
         return new TripModel(
                 tripRequest.getTitle(),
+                tripRequest.getUserId(),
                 tripRequest.getDescription(),
                 tripRequest.getStartPosition(),
                 tripRequest.getEndPosition(),

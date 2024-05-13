@@ -33,6 +33,11 @@ def get_password_hash(password):
     return pwd_context.hash(password)
 
 
+def get_user_by_id(user_id: UUID):
+    with Database().get_session() as session:
+        return session.query(User).filter(User.id == user_id).first()
+
+
 def authenticate_user(login_dto: LoginDTO) -> User | None:
     with Database().get_session() as session:
         user = session.query(User).filter(User.username == login_dto.username).first()

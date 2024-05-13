@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 public class TripServiceImpl implements TripService {
 
     private final GetTrip getTrip;
+    private final GetTripByUserId getTripByUserId;
     private final CreateTrip createTrip;
     private final PatchTrip patchTrip;
     private final DeleteTrip deleteTrip;
@@ -42,6 +43,15 @@ public class TripServiceImpl implements TripService {
         TripEntity tripEntity = getTrip.execute(tripId);
 
         return tripEntityMapper.toResponse(tripEntity);
+    }
+
+    @Override
+    public List<TripResponse> getTripsByUserId(String userId) {
+        List<TripEntity> tripEntities = getTripByUserId.execute(userId);
+
+        return tripEntities.stream()
+                .map(tripEntityMapper::toResponse)
+                .collect(Collectors.toList());
     }
 
     @Override

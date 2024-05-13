@@ -15,27 +15,43 @@ services:
       - "3306:3306"
     volumes:
       - 'mysql-db:/var/lib/mysql'
-  # auth-service:
-  #   build: auth-service
-  #   ports:
-  #     - "3003:3003"
-  #   volumes:
-  #     - ./auth-service:/auth-service
-  #   command: uvicorn main:app --reload --host 0.0.0.0 --port 3003
-  #   environment:
-  #     JWT_SECRET: ${JWT_ALGORITHM}
-  #     JWT_ALGORITHM: ${JWT_ALGORITHM}
-  #     MYSQL_USER: ${MYSQL_USER}
-  #     MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-  #     MYSQL_SERVER: ${MYSQL_SERVER}
-  #     MYSQL_SCHEMA: ${MYSQL_SCHEMA}
+  gateway:
+    build: gateway
+    depends_on:
+      - mysql-db
+      - auth-service
+      - places-service
+      - trip-service
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./gateway:/gateway
+    command: uvicorn main:app --reload --host 0.0.0.0 --port 5000
+    environment:
+      JWT_SECRET: ${JWT_SECRET}
+  auth-service:
+    build: auth-service
+    depends_on:
+      - mysql-db
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./auth-service:/auth-service
+    command: uvicorn main:app --reload --host 0.0.0.0 --port 5001
+    environment:
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_ALGORITHM: ${JWT_ALGORITHM}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_SERVER: ${MYSQL_SERVER}
+      MYSQL_SCHEMA: ${MYSQL_SCHEMA}
   places-service:
     build: places-service
     ports:
-      - "3002:3002"
+      - "5002:5002"
     volumes:
       - ./places-service:/places-service
-    command: uvicorn main:app --reload --host 0.0.0.0 --port 3002
+    command: uvicorn main:app --reload --host 0.0.0.0 --port 5002
     environment:
       GOOGLE_PLACES_API_BASE_URL: ${GOOGLE_PLACES_API_BASE_URL}
       GOOGLE_PLACES_API_KEY: ${GOOGLE_PLACES_API_KEY}
@@ -46,6 +62,18 @@ services:
     restart: on-failure
     ports:
       - "8080:8080"
+#  app:
+#    build:
+#      context: ./front
+#      dockerfile: Dockerfile
+#    container_name: app
+#    ports:
+#      - '3000:3000'
+#    depends_on:
+#      - trip-service
+#    volumes:
+#      - .:/app
+#      - /app/node_modules
 
 volumes:
   mysql-db:

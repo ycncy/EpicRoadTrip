@@ -11,6 +11,7 @@ import java.util.UUID;
 public interface TripService {
     List<TripStopResponse> getTripStops(UUID tripId);
     TripResponse getById(UUID tripId);
+    List<TripResponse> getTripsByUserId(String userId);
     TripResponse create(TripModel tripModel);
     TripResponse patch(UUID tripId, TripModel tripModel);
     DeleteTripResponse delete(UUID tripId);
