@@ -6,6 +6,15 @@
   width: 7px;
 }
 
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Pour les navigateurs WebKit/Blink comme Chrome et Safari */
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* Pour Internet Explorer et Edge */
+  scrollbar-width: none; /* Pour Firefox */
+}
+
 ::-webkit-scrollbar-track {
   background: #f1f1f1;
 }

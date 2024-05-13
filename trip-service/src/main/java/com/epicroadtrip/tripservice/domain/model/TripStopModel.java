@@ -4,6 +4,7 @@ import java.util.UUID;
 
 public record TripStopModel (
         UUID tripId,
+        String googleId,
         StopType type,
         Position position,
         String name,

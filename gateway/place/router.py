@@ -34,4 +34,4 @@ def get_places(
     if trip_response.status_code != 200:
         raise HTTPException(status_code=trip_response.status_code, detail=trip_response.json().get("message"))
 
-    return [PlaceResponseDTO.from_json(trip) for trip in trip_response.json()]
+    return [PlaceResponseDTO.from_json(trip, place_type) for trip in trip_response.json()]

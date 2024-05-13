@@ -21,6 +21,8 @@ public class TripStopEntity {
     @JoinColumn(name = "trip_id")
     private TripEntity trip;
 
+    private String googleId;
+
     private StopType type;
 
     private String name;

@@ -1,48 +1,64 @@
-import {Trip} from "@/app/lib/model/Trip";
-import {DeleteResponse} from "@/app/lib/model/DeleteResponse";
-import axios from "axios";
-import {TripStop} from "@/app/lib/model/TripStop";
+import { Trip } from "@/app/lib/model/Trip";
+import { DeleteResponse } from "@/app/lib/model/DeleteResponse";
+import {CreateTripStopDto, TripStop} from "@/app/lib/model/TripStop";
 import dayjs from "dayjs";
-
-const axiosService = axios.create({
-    baseURL: "http://localhost:8080/trip"
-})
+import axiosService from "@/app/lib/service/axios.service";
 
 const createTrip = async (trip: Trip): Promise<Trip> => {
-    const response = await axiosService.post("", trip);
-
-    if (response.status === 201) {
+    try {
+        const response = await axiosService.post("/trips", trip);
         return response.data;
-    } else {
-        throw new Error("Failed to create trip");
+    } catch (error) {
+        console.error("Failed to create trip", error);
+        throw error;
     }
-}
+};
+
 const getTripStops = async (tripId: string | null): Promise<TripStop[]> => {
-    const response = await axiosService.get(`/${tripId}/stops`);
-
-    if (response.status !== 404) {
+    try {
+        const response = await axiosService.get(`trips/${tripId}/stops`);
+        console.log(response.data)
         return response.data;
-    } else {
-        throw new Error("Failed to get trip stops");
+    } catch (error) {
+        console.error("Failed to get trip stops", error);
+        throw error;
+    }
+};
+
+
+const addTripStop = async (tripId: string, data: CreateTripStopDto): Promise<TripStop> => {
+    try {
+        const response = await axiosService.post(
+            `trip-stops?trip_id=${tripId}`,
+            data
+        );
+        return response.data;
+    } catch (error) {
+        console.error("Failed to get trip stops", error);
+        throw error;
     }
 }
+
+
 const getTripById = async (tripId: string | null): Promise<Trip> => {
-    const response = await axiosService.get(`/${tripId}`);
-
-    if (response.status !== 404) {
+    try {
+        const response = await axiosService.get(`trips/${tripId}`);
         return response.data;
-    } else {
-        throw new Error("Failed to get trip by id");
+    } catch (error) {
+        console.error("Failed to get trip by id", error);
+        throw error;
     }
-}
+};
 
 const deleteTripById = async (tripId: string): Promise<DeleteResponse> => {
-    const response = await axiosService.delete(`/${tripId}`);
-
-    if (response.status !== 404) return response.data;
-
-    throw new Error("Failed to delete trip");
-}
+    try {
+        const response = await axiosService.delete(`trips/${tripId}`);
+        return response.data;
+    } catch (error) {
+        console.error("Failed to delete trip", error);
+        throw error;
+    }
+};
 
 const patchTripById = async (tripId: string | undefined, tripPatchModel: {
     startDatetime: dayjs.Dayjs | null;
@@ -51,17 +67,20 @@ const patchTripById = async (tripId: string | undefined, tripPatchModel: {
     endLocation: {} | null;
     endDatetime: dayjs.Dayjs | null;
 }): Promise<Trip> => {
-    const response = await axiosService.patch(`/${tripId}`, tripPatchModel);
-
-    if (response.status !== 404) return response.data;
-
-    throw new Error("Failed to patch trip");
-}
+    try {
+        const response = await axiosService.patch(`trips/${tripId}`, tripPatchModel);
+        return response.data;
+    } catch (error) {
+        console.error("Failed to patch trip", error);
+        throw error;
+    }
+};
 
 export const tripService = {
     getTripById,
     getTripStops,
+    addTripStop,
     createTrip,
     patchTripById,
     deleteTripById
-}
+};

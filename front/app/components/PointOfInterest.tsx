@@ -1,35 +1,73 @@
 "use client";
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faMap } from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faPlus, faMap} from '@fortawesome/free-solid-svg-icons';
+import {Place} from "@/app/lib/model/Place";
+import Link from "next/link";
+import {tripService} from "@/app/lib/service/trip.service";
+import {CreateTripStopDto} from "@/app/lib/model/TripStop";
 
- export interface PointOfInterestData {
-  id: string;
-  title: string;
-  position: string;
-  image?: string;
-}
+export default function PointOfInterest({data, tripId}: { data: Place, tripId: string }) {
 
-export default function PointOfInterest({ data }: { data: PointOfInterestData }) {        
-  const { id,title, position, image} = data;
+    const handleAddTripStop = async () => {
+        try {
+            const tripStopData: CreateTripStopDto = {
+                google_id: data.google_id,
+                position: data.location,
+                name: data.name,
+                description: data.summary ? data.summary : "",
+                type: data.type
+            }
+            console.log(data)
+            await tripService.addTripStop(tripId, tripStopData);
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
-  return (
-    <div className="bg-white shadow-md rounded-lg p-4 flex">
-      <div className="w-1/3">
-        <img src={image} alt="Point of Interest" className="w-full h-auto rounded-lg" />
-      </div>
-      <div className="ml-4 flex-grow">
-        <h2 className="text-lg font-semibold mb-2">{title}</h2>
-        <h2 className="text-lg mb-2">{position}</h2>
-        <div className="flex justify-end">
-          <button className="px-2 py-2 bg-blue-500 text-white rounded-md flex items-center justify-center mr-10">
-            <FontAwesomeIcon icon={faPlus}/>
-          </button>
-          <button className="px-2 py-2 bg-blue-500 text-white rounded-md flex items-center justify-center">
-            <FontAwesomeIcon icon={faMap} />
-          </button>
+    return (
+        <div className="bg-white p-4 flex justify-center items-center gap-4">
+            <div className="w-1/4">
+                {data.image_url ? (
+                    <img
+                        className="rounded-full"
+                        src={`https://${data.image_url}`}
+                        alt=""
+                    />
+                ) : (
+                    <img
+                        className="rounded-full"
+                        src="https://cdn-icons-png.flaticon.com/512/7705/7705037.png"
+                        alt=""
+                    />
+                )}
+            </div>
+            <div className="w-3/4">
+                <h2 className="text-lg font-semibold mb-2">{data.name}</h2>
+                <h2 className="text-sm mb-2">{data.address}</h2>
+                <h2 className="text-sm mb-2">{data.summary}</h2>
+                <div className="flex gap-2">
+                    <button
+                        onClick={handleAddTripStop}
+                        className="px-2 py-2 bg-blue-500 text-white rounded-md flex items-center justify-center">
+                        <FontAwesomeIcon icon={faPlus}/>
+                    </button>
+                    {data.google_maps_url ? (
+                        <Link href={data.google_maps_url}>
+                            <button
+                                className="px-2 py-2 bg-blue-500 text-white rounded-md flex items-center justify-center">
+                                <FontAwesomeIcon icon={faMap}/>
+                            </button>
+                        </Link>
+                    ) : (
+                        <button
+                            disabled
+                            className="px-2 py-2 bg-gray-500 text-white rounded-md flex items-center justify-center">
+                            <FontAwesomeIcon icon={faMap}/>
+                        </button>
+                    )}
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 }

@@ -1,70 +1,92 @@
-import { faBars } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect, useState } from 'react';
+import {faBars} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import React, {useEffect, useState} from 'react';
 import PointOfInterest from './PointOfInterest';
 import FilterModal from './Modal/FilterModal';
-import { tripService } from '../lib/service/trip.service';
+import {tripService} from '../lib/service/trip.service';
+import {placesService} from "@/app/lib/service/place.service";
+import {Place, PlaceType} from "@/app/lib/model/Place";
 
-const TabPointOfInterest = (props: {tripId: string}) => {
-  const [isSortModalOpen, setIsFilterModalOpen] = useState(false);
-  const [pointsOfInterest, setPointsOfInterest] = useState<any[]>([]);
-  const [trip, setTrip] = useState<any | null>(null);
+const PlaceTypeValues = [
+    PlaceType.CAR_UTILITIES,
+    PlaceType.CULTURE,
+    PlaceType.ENTERTAINMENT,
+    PlaceType.FINANCE,
+    PlaceType.BAR,
+    PlaceType.RESTAURANT,
+    PlaceType.ADMINISTRATIVE_SERVICE,
+    PlaceType.HEALTH,
+    PlaceType.ACCOMMODATION,
+    PlaceType.SERVICES,
+    PlaceType.SHOPPING,
+    PlaceType.SPORT,
+    PlaceType.TRANSPORT
+];
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const tripData = await tripService.getTripById(props.tripId);
-        setTrip(tripData);
-        const response = await fetch("https://data.datatourisme.gouv.fr/10/000ce9fa-eaca-3d78-a395-8798b5965cbc");
-        const data = await response.json();
-        setPointsOfInterest(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+const TabPointOfInterest = (props: { tripId: string }) => {
+    const [isSortModalOpen, setIsFilterModalOpen] = useState(false);
+    const [trip, setTrip] = useState<any | null>(null);
+    const [pointsOfInterest, setPointsOfInterest] = useState<Place[]>([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const tripData = await tripService.getTripById(props.tripId);
+                setTrip(tripData);
+                const response = await placesService.getPlaces({
+                    place_type: PlaceType.BAR,
+                    latitude: tripData.startPosition.latitude,
+                    longitude: tripData.startPosition.longitude,
+                    radius: 1000
+                });
+                setPointsOfInterest(response);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData();
+    }, [props.tripId]);
+
+    const handleOpenFilterModal = () => {
+        setIsFilterModalOpen(true);
     };
 
-    fetchData();
-  }, [props.tripId]);
+    const handleCloseFilterModal = () => {
+        setIsFilterModalOpen(false);
+    };
 
-  const handleOpenFilterModal = () => {
-    setIsFilterModalOpen(true);
-  };
+    const handleSortChange = async (place: PlaceType) => {
+        const response = await placesService.getPlaces({
+            place_type: place,
+            latitude: trip.startPosition.latitude,
+            longitude: trip.startPosition.longitude,
+            radius: 1000
+        });
+        setPointsOfInterest(response);
+    };
 
-  const handleCloseFilterModal = () => {
-    setIsFilterModalOpen(false);
-  };
-
-  const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedSortOption = event.target.value;
-  };
-
-  return (
-    <div className="py-2">
-      {trip && trip.title}
-      <div className="flex justify-center mb-4">
-        <button onClick={handleOpenFilterModal} className="px-2 py-1 bg-blue-500 text-white rounded-md mr-14">
-          <FontAwesomeIcon icon={faBars} className='mr-2' />
-          Filtrer
-        </button>
-        <select id="sort" name="sort" className="px-2 py-1 bg-blue-500 text-white rounded-md" onChange={handleSortChange}>
-          <option value="" disabled selected>
-            Trier
-          </option>
-          <option value="option1">Les plus proches</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
-        </select>
-      </div>
-      <div className="p-4 ">
-        {isSortModalOpen && <FilterModal onClose={handleCloseFilterModal} />}
-      </div>
-      <ul>
-        {pointsOfInterest.map((point, index) => (
-          <PointOfInterest key={index} data={point} />
-        ))}
-      </ul>
-    </div>
-  );
+    return (
+        <div className="py-2">
+            <div className="hide-scrollbar p-2 flex gap-2 overflow-y-scroll">
+                {PlaceTypeValues.map(place => (
+                    <button
+                        className="p-2 bg-blue-500 text-white rounded-full"
+                        key={place} onClick={() => handleSortChange(place)}>
+                        {place.valueOf()}
+                    </button>
+                ))}
+            </div>
+            <div className="p-4 ">
+                {isSortModalOpen && <FilterModal onClose={handleCloseFilterModal}/>}
+            </div>
+            <ul className="py-2 flex flex-col gap-2">
+                {pointsOfInterest.map((point, index) => (
+                    <PointOfInterest key={index} data={point} tripId={trip.id}/>
+                ))}
+            </ul>
+        </div>
+    );
 };
 
 export default TabPointOfInterest;

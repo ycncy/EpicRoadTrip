@@ -32,8 +32,10 @@ class GetPlaceDTO(BaseModel):
 
 
 class PlaceResponseDTO(BaseModel):
+    google_id: str | None = Field(default=None, example="")
     address: str | None = Field(default=None, example="82 Rue de la république")
     location: Location | None
+    type: str
     google_maps_url: str | None = Field(default=None, example="https://maps.googleapis.com/maps/api")
     name: str | None = Field(default=None, example="Restaurant République")
     phone_number: str | None = Field(default=None, example="+33 12 39 23 90")
@@ -43,10 +45,12 @@ class PlaceResponseDTO(BaseModel):
     rating: float | None = Field(default=None, example=3.4)
 
     @classmethod
-    def from_json(cls, json_dict: dict) -> 'PlaceResponseDTO':
+    def from_json(cls, json_dict: dict, type: PlaceType) -> 'PlaceResponseDTO':
         return cls(
+            google_id=json_dict['id'],
             address=json_dict['address'],
             location=json_dict['location'],
+            type=type.value,
             google_maps_url=json_dict['google_maps_url'],
             name=json_dict['name'],
             phone_number=json_dict['phone_number'],

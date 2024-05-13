@@ -20,6 +20,7 @@ public class TripStopDtoMapper {
 
         return new TripStopModel(
                 tripId,
+                createTripStopRequest.google_id(),
                 createTripStopRequest.type(),
                 createTripStopRequest.position(),
                 createTripStopRequest.name(),
@@ -30,6 +31,7 @@ public class TripStopDtoMapper {
     public TripStopModel patchDtoToDomain (PatchTripStopRequest patchTripStopRequest) {
         return new TripStopModel(
                 patchTripStopRequest.tripId(),
+                patchTripStopRequest.google_id(),
                 patchTripStopRequest.type(),
                 patchTripStopRequest.position(),
                 patchTripStopRequest.name(),

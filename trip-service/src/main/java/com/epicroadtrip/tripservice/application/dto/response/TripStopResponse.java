@@ -8,6 +8,7 @@ import java.util.UUID;
 public record TripStopResponse (
     int id,
     UUID tripId,
+    String googleId,
     StopType type,
     String name,
     String description,

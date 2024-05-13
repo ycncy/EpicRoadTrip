@@ -9,7 +9,7 @@ from middleware.jwt_bearer import JWTBearer
 from trip.dto import TripResponseDTO, CreateTripDTO, PatchTripDTO, TripStopResponseDTO
 
 trip_router = APIRouter(
-    prefix="/trip",
+    prefix="/trips",
     tags=["Trip"],
 )
 

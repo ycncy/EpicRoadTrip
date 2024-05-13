@@ -9,11 +9,11 @@ class TripResponseDTO(BaseModel):
     id: str = Field(example="550e8400-e29b-41d4-a716-446655440000")
     user_id: str = Field(example="2c0dcffaa7e3412492b79fd2f8a5f298")
     title: str = Field(example="Paris-Marseille")
-    description: str = Field(example="Voyage été 2024")
+    description: Optional[str] = Field(default=None, example="Voyage été 2024")
     startPosition: Position
     endPosition: Position
-    startDatetime: str = Field(example="2024-05-07T12:06:15.879Z")
-    endDatetime: str = Field(example="2024-05-07T12:06:15.879Z")
+    startDatetime: Optional[str] = Field(default=None, example="2024-05-07T12:06:15.879Z")
+    endDatetime: Optional[str] = Field(default=None, example="2024-05-07T12:06:15.879Z")
     createdAt: str
 
     @classmethod
@@ -57,6 +57,7 @@ class PatchTripDTO(BaseModel):
 
 
 class CreateTripStopDTO(BaseModel):
+    google_id: str = Field(example="ChIJ60tzEQDByRIRc5rkNszNXpY")
     type: str = Field(example="HOTEL")
     position: Position
     name: str = Field(example="Hotel X")
@@ -64,6 +65,7 @@ class CreateTripStopDTO(BaseModel):
 
 
 class PatchTripStopDTO(BaseModel):
+    google_id: str = Field(example="ChIJ60tzEQDByRIRc5rkNszNXpY")
     type: Optional[str] = Field(default=None, example="HOTEL")
     position: Optional[Position] = None
     name: Optional[str] = Field(default=None, example="Hotel X")
@@ -73,6 +75,7 @@ class PatchTripStopDTO(BaseModel):
 class TripStopResponseDTO(BaseModel):
     id: int = Field(example=1)
     tripId: str = Field(example="550e8400-e29b-41d4-a716-446655440000")
+    googleId: Optional[str] = Field(default=None, example="ChIJ60tzEQDByRIRc5rkNszNXpY")
     type: str = Field(example="HOTEL")
     position: Position
     name: str = Field(example="Hotel X")
@@ -84,9 +87,11 @@ class TripStopResponseDTO(BaseModel):
         position_instance = Position(latitude=data_dict["position"]["latitude"],
                                      longitude=data_dict["position"]["longitude"])
 
+        print(data_dict)
         return cls(
             id=data_dict["id"],
             tripId=data_dict["tripId"],
+            googleId=data_dict.get("googleId", None),
             type=data_dict["type"],
             position=position_instance,
             name=data_dict["name"],

@@ -18,6 +18,7 @@ public class TripStopEntityMapper {
         TripStopEntity tripStopEntity = new TripStopEntity();
         TripEntity tripEntity = springMySqlTripRepository.findById(tripStopModel.tripId()).get();
 
+        tripStopEntity.setGoogleId(tripStopModel.googleId());
         tripStopEntity.setTrip(tripEntity);
         tripStopEntity.setType(tripStopModel.type());
         tripStopEntity.setName(tripStopModel.name());
@@ -31,6 +32,7 @@ public class TripStopEntityMapper {
         return new TripStopResponse(
                 tripStopEntity.getId(),
                 tripStopEntity.getTrip().getId(),
+                tripStopEntity.getGoogleId(),
                 tripStopEntity.getType(),
                 tripStopEntity.getName(),
                 tripStopEntity.getDescription(),

@@ -10,6 +10,9 @@ public record PatchTripStopRequest (
         @Schema(description = "Trip ID", example = "550e8400-e29b-41d4-a716-446655440000", requiredMode = Schema.RequiredMode.REQUIRED)
         UUID tripId,
 
+        @Schema(description = "Stop Google Place ID", example = "", requiredMode = Schema.RequiredMode.REQUIRED)
+        String google_id,
+
         @Schema(description="Stop type", example="HOTEL", requiredMode=Schema.RequiredMode.REQUIRED)
         StopType type,
 

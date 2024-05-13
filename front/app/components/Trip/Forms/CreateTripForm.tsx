@@ -71,6 +71,7 @@ const CreateTripForm = () => {
         event.preventDefault();
 
         const trip: Trip = {
+            userId: localStorage.getItem("userId"),
             startPosition: formData.startLocation,
             endPosition: formData.endLocation,
             endDatetime: formData.endDatetime.toDate(),

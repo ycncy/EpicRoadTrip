@@ -52,6 +52,7 @@ class Location(BaseModel):
 
 
 class Place(BaseModel):
+    id: str = None
     address: Optional[str] = None
     location: Optional[Location] = None
     google_maps_url: Optional[str] = None
@@ -64,7 +65,9 @@ class Place(BaseModel):
 
     @classmethod
     def from_google_api(cls, place: dict) -> 'Place':
+        image_url = place.get("photos", [{}])[0].get("authorAttributions", [{}])[0].get("photoUri", None)
         return cls(
+            id=place.get("id", None),
             address=place.get("formattedAddress", None),
             location=place.get("location", None),
             google_maps_url=place.get("googleMapsUri", None),
@@ -72,6 +75,6 @@ class Place(BaseModel):
             phone_number=place.get("internationalPhoneNumber", None),
             website_url=place.get("websiteUri", None),
             summary=place.get("editorialSummary", {}).get("text", None),
-            image_url=place.get("photos", [{}])[0].get("authorAttributions", [{}])[0].get("photoUri", None),
+            image_url=image_url[2:] if image_url is not None else None,
             rating=place.get("rating", None)
         )
