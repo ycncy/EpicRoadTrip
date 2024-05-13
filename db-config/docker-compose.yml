@@ -1,0 +1,20 @@
+version: '3.3'
+
+services:
+  db_prod:
+    image: 'mysql:5.7'
+    restart: 'always'
+    environment:
+      MYSQL_DATABASE: 'epic_road_trip'
+      MYSQL_USER: 'test'
+      MYSQL_PASSWORD: 'test'
+      MYSQL_ROOT_PASSWORD: 'test'
+      MYSQL_ALLOW_EMPTY_PASSWORD: null
+      MYSQL_RANDOM_ROOT_PASSWORD: null
+    ports:
+      - "3306:3306"
+    volumes:
+      - 'my-db-prod:/var/lib/mysql'
+
+volumes:
+  my-db-prod:
