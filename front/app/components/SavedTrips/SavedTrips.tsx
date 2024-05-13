@@ -19,7 +19,7 @@ const SavedTrips = () => {
     }, []);
 
     return (
-        <div className="bg-[#5739FC] flex flex-col gap-12 p-16 h-screen">
+        <div className="flex flex-col gap-12 p-16 h-screen" style={{ backgroundImage: "url('/road.png')" }}>
             <div className="w-2/5 flex flex-col gap-4 text-center mx-auto text-white">
                 <p className="text-lg">Retrouvez tous vos road trips !</p>
             </div>

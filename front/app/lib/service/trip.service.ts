@@ -36,6 +36,7 @@ const getTripById = async (tripId: string | null): Promise<Trip> => {
     }
 }
 
+
 const deleteTripById = async (tripId: string): Promise<DeleteResponse> => {
     const response = await axiosService.delete(`/${tripId}`);
 
@@ -58,10 +59,14 @@ const patchTripById = async (tripId: string | undefined, tripPatchModel: {
     throw new Error("Failed to patch trip");
 }
 
+
+
+
+
 export const tripService = {
     getTripById,
     getTripStops,
-    createTrip,
+    createTrip, 
     patchTripById,
     deleteTripById
 }
