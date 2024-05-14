@@ -58,9 +58,7 @@ const patchTripById = async (tripId: string | undefined, tripPatchModel: {
 
     throw new Error("Failed to patch trip");
 }
-
-
-
+   
 
 
 export const tripService = {
