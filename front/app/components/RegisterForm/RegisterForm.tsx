@@ -16,7 +16,7 @@ const RegisterForm = () => {
             return;
         }
         
-        const response = await authService.register({ email, password });
+        const response = await authService.register({ username: email, password: password });
 
         if (response.status === 201) {
             alert('Compte creé');

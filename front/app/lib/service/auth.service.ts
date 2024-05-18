@@ -3,7 +3,6 @@ import axios from "axios"
 const axiosService = axios.create({
     baseURL: "http://localhost:5001"
 })
- 
 const register = async (data: any) => {
 
     const response = await axiosService.post("/authentication/register", data);

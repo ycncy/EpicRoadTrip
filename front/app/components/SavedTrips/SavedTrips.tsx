@@ -19,9 +19,14 @@ const SavedTrips = () => {
     }, []);
 
     return (
-<div className="bg-cover flex flex-col gap-12 p-16 h-screen" style={{ backgroundImage:  `url('../public/images/road.jpg')`}}>
-            <div className="w-2/5 flex flex-col gap-4 text-center mx-auto text-white">
-                <p className="text-lg">Retrouvez tous vos road trips !</p>
+<div className="bg-[#5739FC] flex flex-col gap-12 p-16 h-screen background-opacity-10" >
+<div className="bg-cover h-2/3 w-full flex flex-col gap-4 text-center mx-auto text-white" style={{ 
+                backgroundImage: `url('https://www.carnets-voyages.org/wp-content/uploads/2020/12/idees-road-trip-europe.jpg')`,
+                backgroundPosition: 'center',
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat'
+            }}>
+                                <p className="text-lg sm:text-5xl font-serif">Retrouvez tous vos road trips!</p>
             </div>
             <div className="grid grid-cols-3 gap-4 mx-auto">
                 {savedTrips.map((trip, index) => (
