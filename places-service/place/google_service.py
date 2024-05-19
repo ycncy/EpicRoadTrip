@@ -18,7 +18,7 @@ def get_places_by_type(place_types: List[str], longitude: float, latitude: float
         },
         data=json.dumps({
             "includedPrimaryTypes": place_types,
-            "maxResultCount": 20,
+            "maxResultCount": 5,
             "languageCode": "fr",
             "locationRestriction": {
                 "circle": {

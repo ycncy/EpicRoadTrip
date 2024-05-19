@@ -1,5 +1,5 @@
-import { Trip } from "@/app/lib/model/Trip";
-import { DeleteResponse } from "@/app/lib/model/DeleteResponse";
+import {Trip} from "@/app/lib/model/Trip";
+import {DeleteResponse} from "@/app/lib/model/DeleteResponse";
 import {CreateTripStopDto, TripStop} from "@/app/lib/model/TripStop";
 import dayjs from "dayjs";
 import axiosService from "@/app/lib/service/axios.service";
@@ -17,13 +17,17 @@ const createTrip = async (trip: Trip): Promise<Trip> => {
 const getTripStops = async (tripId: string | null): Promise<TripStop[]> => {
     try {
         const response = await axiosService.get(`trips/${tripId}/stops`);
-        console.log(response.data)
         return response.data;
     } catch (error) {
         console.error("Failed to get trip stops", error);
         throw error;
     }
 };
+
+
+const deleteTripStop = async (tripStopId: number | undefined) => {
+    await axiosService.delete(`trip-stops/${tripStopId}`);
+}
 
 
 const addTripStop = async (tripId: string, data: CreateTripStopDto): Promise<TripStop> => {
@@ -50,7 +54,7 @@ const getTripById = async (tripId: string | null): Promise<Trip> => {
     }
 };
 
-const deleteTripById = async (tripId: string): Promise<DeleteResponse> => {
+const deleteTripById = async (tripId: string | undefined): Promise<DeleteResponse> => {
     try {
         const response = await axiosService.delete(`trips/${tripId}`);
         return response.data;
@@ -64,11 +68,19 @@ const patchTripById = async (tripId: string | undefined, tripPatchModel: {
     startDatetime: dayjs.Dayjs | null;
     startLocation: {} | null;
     title: string | null;
+    userId: string;
     endLocation: {} | null;
     endDatetime: dayjs.Dayjs | null;
 }): Promise<Trip> => {
     try {
-        const response = await axiosService.patch(`trips/${tripId}`, tripPatchModel);
+        const response = await axiosService.patch(`trips/${tripId}`, {
+            startDatetime: tripPatchModel.startDatetime,
+            startPosition: tripPatchModel.startLocation,
+            title: tripPatchModel.title,
+            userId: tripPatchModel.userId,
+            endPosition: tripPatchModel.endLocation,
+            endDatetime: tripPatchModel.endDatetime
+        });
         return response.data;
     } catch (error) {
         console.error("Failed to patch trip", error);
@@ -79,6 +91,7 @@ const patchTripById = async (tripId: string | undefined, tripPatchModel: {
 export const tripService = {
     getTripById,
     getTripStops,
+    deleteTripStop,
     addTripStop,
     createTrip,
     patchTripById,

@@ -5,13 +5,15 @@ import dayjs from "dayjs";
 import localizedFormat from 'dayjs/plugin/localizedFormat';
 import FinishFlag from "../public/images/finish-flag.png";
 import Accommodation from "@/app/public/images/accommodation.png"
-
-dayjs.extend(localizedFormat);
 import 'dayjs/locale/fr';
 import Image from "next/image";
 import {TripStop} from "@/app/lib/model/TripStop";
+import {faMinus} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+dayjs.extend(localizedFormat);
 
 const TabItinerary = (props: {tripId: string}) => {
+    const userId = localStorage.getItem("userId");
     const [trip, setTrip] = useState<Trip>();
     const [tripStops, setTripStops] = useState<TripStop[]>([])
     const [startLocation, setStartLocation] = useState();
@@ -58,11 +60,11 @@ const TabItinerary = (props: {tripId: string}) => {
                 </div>
             </div>
             {
-                tripStops.length > 0 ? <div>
+                tripStops.length > 0 ? <div className="flex flex-col gap-2">
                     {tripStops.map((tripStop: TripStop, index) => {
                         return (
-                            <div className="flex justify-start items-center gap-8 p-4 bg-white" key={index}>
-                                <div className="rounded-full bg-blue-400 w-12 h-12 p-3 flex justify-center">
+                            <div className="flex justify-start items-center pr-2 gap-8 bg-white" key={index}>
+                                <div className="bg-blue-400 w-24 h-24 flex justify-center items-center">
                                     <Image
                                         src={Accommodation}
                                         width="24"
@@ -74,6 +76,16 @@ const TabItinerary = (props: {tripId: string}) => {
                                     <h1 className="text-md font-bold">{tripStop.name}</h1>
                                     <h2 className="text-sm">{tripStop.description}</h2>
                                 </div>
+                                {
+                                    trip?.user_id == userId &&
+                                    <button
+                                        className="bg-red-500 text-white p-2 rounded-full flex justify-center items-center"
+                                        onClick={async () => {
+                                            await tripService.deleteTripStop(tripStop.id)
+                                        }}>
+                                        <FontAwesomeIcon icon={faMinus}/>
+                                    </button>
+                                }
                             </div>
                         )
                     })}

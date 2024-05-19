@@ -1,18 +1,31 @@
 "use client";
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import TabPointOfInterest from './TabPointOfInterest';
 import TabItinerary from './TabItinerary';
 import TripInformations from "@/app/components/Trip/TripInformations";
+import {Trip} from "@/app/lib/model/Trip";
+import {tripService} from "@/app/lib/service/trip.service";
+import dayjs from "dayjs";
 
 const Sidebar = (props: { tripId: string }) => {
+    const userId = localStorage.getItem("userId");
+    const [trip, setTrip] = useState<Trip>();
     const [activeTab, setActiveTab] = useState('informations');
+
+    useEffect(() => {
+        const loadTripData = async () => {
+            const trip: Trip = await tripService.getTripById(props.tripId);
+            setTrip(trip);
+        }
+        loadTripData();
+    }, []);
 
     const handleTabChange = (tab: React.SetStateAction<string>) => {
         setActiveTab(tab);
     };
 
     return (
-        <div className="bg-gray-200 h-screen overflow-y-auto w-1/3 flex-grow">
+        <div className="bg-gray-200 h-screen text-black overflow-y-auto w-1/3 flex-grow">
             <div className="flex">
                 <button
                     className={`flex-1 py-2 ${
@@ -22,14 +35,14 @@ const Sidebar = (props: { tripId: string }) => {
                 >
                     Résumé du trajet
                 </button>
-                <button
+                {trip?.user_id == userId && <button
                     className={`flex-1 py-2 ${
                         activeTab === 'pointInteret' ? 'bg-blue-500 text-white text-center' : 'bg-gray-300 text-center'
                     }`}
                     onClick={() => handleTabChange('pointInteret')}
                 >
                     Point d'Intérêt
-                </button>
+                </button>}
                 <button
                     className={`flex-1 py-2 ${
                         activeTab === 'itineraire' ? 'bg-blue-500 text-white text-center' : 'bg-gray-300 text-center'
@@ -40,7 +53,7 @@ const Sidebar = (props: { tripId: string }) => {
                 </button>
             </div>
             <div>
-                {activeTab === 'pointInteret' && (
+                {activeTab === 'pointInteret' &&  (
                     <TabPointOfInterest tripId={props.tripId}/>
                 )}
                 {activeTab === 'itineraire' && (
