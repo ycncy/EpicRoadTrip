@@ -7,16 +7,16 @@ class TripPDF {
     this.pdf = new jsPDF();
   }
 
-  public addTitle(title: string): void {
+  public addTitle(title: string, x: number, y: number): void {
     this.pdf.setFontSize(16);
     this.pdf.setFont('helvetica', 'bold');
-    this.pdf.text(title, 10, 20);
+    this.pdf.text(title, x, y);
   }
 
-  public addSubtitle(subtitle: string): void {
+  public addSubtitle(subtitle: string, x: number, y: number): void {
     this.pdf.setFontSize(14);
     this.pdf.setFont('helvetica', 'normal');
-    this.pdf.text(subtitle, 10, 30);        
+    this.pdf.text(subtitle, x, y);        
   }
   public addText(text: string, x: number, y: number): void {
     this.pdf.setFontSize(12);
