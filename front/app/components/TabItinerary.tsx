@@ -34,6 +34,7 @@ const TabItinerary = (props: {tripId: string}) => {
             setEndLocation(endResult.features[0].properties.city);
         }
 
+        
         loadTripData();
     }, []);
 

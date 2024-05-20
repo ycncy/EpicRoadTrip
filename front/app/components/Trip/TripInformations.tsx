@@ -15,7 +15,7 @@ import { Switch } from '@mui/material';
 import {useRouter} from "next/navigation";
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import TripPDF from "@/app/components/TripPDF/TripPDF";
-
+import Epic from "@/app/public/images/epic_road_trip.png";
 const TripInformations = (props) => {
     const userId = localStorage.getItem("userId");
     const [trip, setTrip] = useState<Trip>();
@@ -116,13 +116,24 @@ const TripInformations = (props) => {
 
     function handleExport(): void {
         const pdfModel = new TripPDF();
+        pdfModel.addImage(Epic.src, 10, 10, 190, 80);
 
-        pdfModel.addTitle("Informations du voyage");
-        pdfModel.addText(`Titre: ${formData.title}`, 10, 30);
-        pdfModel.addText(`Date de départ: ${formData.startDatetime.format('YYYY-MM-DD HH:mm:ss')}`, 10, 40);
-        pdfModel.addText(`Date d'arrivée: ${formData.endDatetime.format('YYYY-MM-DD HH:mm:ss')}`, 10, 50);
-        pdfModel.addText(`Ville de départ: ${startLocation}`, 10, 60);
-        pdfModel.addText(`Ville d'arrivée: ${endLocation}`, 10, 70);
+        pdfModel.addTitle(`Nom : ${formData.title}`, 10, 110);
+
+        pdfModel.addText(`Date de départ: ${formData.startDatetime.format('YYYY-MM-DD HH:mm:ss')}`, 10, 120);
+        pdfModel.addText(`Date d'arrivée: ${formData.endDatetime.format('YYYY-MM-DD HH:mm:ss')}`, 10, 130); 
+        pdfModel.addText(`Ville de départ: ${startLocation}`, 10, 140); 
+        pdfModel.addText(`Ville d'arrivée: ${endLocation}`, 10, 150); 
+
+            
+        pdfModel.addSubtitle(`Les arrêt du trajet: `, 10, 170);
+        let yPos = 200;
+
+        tripStops.forEach((tripStop, index) => {
+            pdfModel.addText(`${index + 1}: ${tripStop.name}`, 10, yPos);
+            pdfModel.addText(`Ville: ${tripStop.position}`, 10, yPos + 10);
+            yPos += 20; 
+        });
 
         pdfModel.save(`${formData.title}.pdf`);
     }
