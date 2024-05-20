@@ -322,19 +322,21 @@ const TripInformations = (props) => {
                     </div>
                 }
 
-                <button
-                    onClick={handleShare}
-                    className="w-full border-2 border-gray-500 text-md h-full p-2 text-black rounded-xl mt-10"
-                >
-                    Partager
-                </button>
+                <div className="flex px-4 py-8 gap-2">
+                    <button
+                        onClick={handleShare}
+                        className="w-full border-2 border-gray-500 text-md h-full p-2 text-black rounded-xl"
+                    >
+                        Partager
+                    </button>
 
-                <button
-                    onClick={handleExport}
-                    className="w-full border-2 border-gray-500 text-md h-full p-2 text-black rounded-xl mt-10"
-                >
-                    Exporter
-                </button>
+                    <button
+                        onClick={handleExport}
+                        className="w-full border-2 border-gray-500 text-md h-full p-2 text-black rounded-xl"
+                    >
+                        Exporter
+                    </button>
+                </div>
 
 
             </div>

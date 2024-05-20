@@ -49,13 +49,13 @@ export default function PointOfInterest({data, tripId}: { data: Place, tripId: s
                 <div className="flex gap-2">
                     <button
                         onClick={handleAddTripStop}
-                        className="px-2 py-2 bg-blue-500 text-white rounded-md flex items-center justify-center">
+                        className="px-2 py-2 bg-[#5739FC] text-white rounded-md flex items-center justify-center">
                         <FontAwesomeIcon icon={faPlus}/>
                     </button>
                     {data.google_maps_url ? (
                         <Link href={data.google_maps_url}>
                             <button
-                                className="px-2 py-2 bg-blue-500 text-white rounded-md flex items-center justify-center">
+                                className="px-2 py-2 bg-[#5739FC] text-white rounded-md flex items-center justify-center">
                                 <FontAwesomeIcon icon={faMap}/>
                             </button>
                         </Link>

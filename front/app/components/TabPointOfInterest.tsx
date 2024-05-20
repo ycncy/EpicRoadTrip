@@ -67,7 +67,6 @@ const getStepsPositions = async (data: any) => {
 }
 
 const TabPointOfInterest = (props: { tripId: string }) => {
-    const userId = localStorage.getItem("userId");
     const [isSortModalOpen, setIsFilterModalOpen] = useState(false);
     const [trip, setTrip] = useState<any | null>(null);
     const [steps, setSteps] = useState<Map<string, any>>(new Map<string, any>());
@@ -205,7 +204,7 @@ const TabPointOfInterest = (props: { tripId: string }) => {
             <div className="hide-scrollbar p-2 flex gap-2 overflow-y-scroll">
                 {PlaceTypeValues.map(place => (
                     <button
-                        className="p-2 bg-blue-500 text-white rounded-full"
+                        className="p-2 bg-[#5739FC] text-white rounded-full"
                         key={place} onClick={() => handleSortChange(place)}>
                         {place.valueOf()}
                     </button>

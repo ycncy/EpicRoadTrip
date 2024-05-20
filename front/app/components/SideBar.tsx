@@ -29,15 +29,15 @@ const Sidebar = (props: { tripId: string }) => {
             <div className="flex">
                 <button
                     className={`flex-1 py-2 ${
-                        activeTab === 'informations' ? 'bg-blue-500 text-white text-center' : 'bg-gray-300 text-center'
+                        activeTab === 'informations' ? 'bg-[#5739FC] text-white text-center' : 'bg-gray-300 text-center'
                     }`}
                     onClick={() => handleTabChange('informations')}
                 >
                     Résumé du trajet
                 </button>
                 {trip?.user_id == userId && <button
-                    className={`flex-1 py-2 ${
-                        activeTab === 'pointInteret' ? 'bg-blue-500 text-white text-center' : 'bg-gray-300 text-center'
+                    className={`flex-1 py-4 ${
+                        activeTab === 'pointInteret' ? 'bg-[#5739FC] text-white text-center' : 'bg-gray-300 text-center'
                     }`}
                     onClick={() => handleTabChange('pointInteret')}
                 >
@@ -45,7 +45,7 @@ const Sidebar = (props: { tripId: string }) => {
                 </button>}
                 <button
                     className={`flex-1 py-2 ${
-                        activeTab === 'itineraire' ? 'bg-blue-500 text-white text-center' : 'bg-gray-300 text-center'
+                        activeTab === 'itineraire' ? 'bg-[#5739FC] text-white text-center' : 'bg-gray-300 text-center'
                     }`}
                     onClick={() => handleTabChange('itineraire')}
                 >
