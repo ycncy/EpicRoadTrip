@@ -15,7 +15,7 @@ class TripPDF {
 
   public addSubtitle(subtitle: string): void {
     this.pdf.setFontSize(14);
-    this.pdf.setFont('sans-serif', 'bold');
+    this.pdf.setFont('helvetica', 'normal');
     this.pdf.text(subtitle, 10, 30);        
   }
   public addText(text: string, x: number, y: number): void {

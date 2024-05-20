@@ -1,13 +1,15 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import Road from "@/app/public/images/road.jpg";
 
-const SavedTrips = () => {
+const SavedTrips = ( { userId }: { userId: string }) => {
     const [savedTrips, setSavedTrips] = useState([]);
 
     useEffect(() => {
         const fetchTrips = async () => {
             try {
-                const response = await fetch('votre_endpoint_api');
+                const response = await fetch(`/trip/users/${userId}`);
+                console.log("Response:", response);
                 const data = await response.json();
                 setSavedTrips(data);
             } catch (error) {
@@ -19,9 +21,9 @@ const SavedTrips = () => {
     }, []);
 
     return (
-<div className="bg-[#5739FC] flex flex-col gap-12 p-16 h-screen background-opacity-10" >
-<div className="bg-cover h-2/3 w-full flex flex-col gap-4 text-center mx-auto text-white" style={{ 
-                backgroundImage: `url('https://www.carnets-voyages.org/wp-content/uploads/2020/12/idees-road-trip-europe.jpg')`,
+<div className="bg-[#ffedc1] flex flex-col gap-12 p-16 h-screen background-opacity-10" >
+<div className="bg-cover h-2/3 w-full flex flex-col gap-4 items-center justify-center mx-auto text-white" style={{ 
+                backgroundImage: `url(${Road})`,
                 backgroundPosition: 'center',
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat'

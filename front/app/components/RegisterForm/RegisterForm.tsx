@@ -7,7 +7,7 @@ const RegisterForm = () => {
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
-        const email = formData.get('email') as string;
+        const username = formData.get('username') as string;
         const password = formData.get('password') as string;
         const confirmPassword = formData.get('confirm-password') as string;
 
@@ -16,7 +16,9 @@ const RegisterForm = () => {
             return;
         }
         
-        const response = await authService.register({ username: email, password: password });
+        const response = await authService.register({ username: username, password: password });
+
+        console.log(response.status);
 
         if (response.status === 201) {
             alert('Compte creé');
@@ -39,8 +41,8 @@ const RegisterForm = () => {
               </h1>
               <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}> 
                   <div>
-                      <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                      <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="nom@gmail.com" required/>
+                      <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nom d'utilisateur</label>
+                      <input type="username" name="username" id="username" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="nom d'utilisateur" required/>
                   </div>
                   <div>
                       <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mot de passe </label>
